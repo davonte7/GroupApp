@@ -1,0 +1,51 @@
+Overall Functions: Allow users to create projects and track the progression of the project and know who is responsible for what.
+
+Some Key Functions
+	Create a project
+	Create a team
+	Track progress
+	Schedule meetings
+	User Login
+	Assign roles to users
+
+Possible Pages that need to be Created
+	Login Page
+	Home Page
+	Create a Project Page
+	Edit a Project Page
+	Project Detail Page
+	Sign Up Page
+	Add Users to Project Page
+	Schedule Meetings Page
+    Edit Meeting Page
+	User Profile Page
+	Create a Team Page
+    Edit Team Page
+    Team Detail Page
+    Create Task Page
+    Edit Task Page
+    Task Detail Page
+
+Possible Objects Needed to Make App Function
+	User Object
+	Project Object
+	Task Object
+	Team Object
+	Meeting Object
+
+Optional Functions
+	Video Calls/Meetings
+	Messaging Page
+	File Upload/Download
+	“Friends” Page
+    Maps Embedded (For Meetings)
+
+Possible Rules
+	Usernames need to be unique
+	One account per email & phone
+	Only owner can add/delete tasks from a project
+	Only owner can add/delete team members
+	Users can remove themselves from projects and request to join projects
+	Only owners can schedule meetings
+    One owner per project
+    Login is required
