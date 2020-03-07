@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="login_form" (submit)="login(login_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">email</ion-label>
+      <ion-input type="text" formControlName="email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">password</ion-label>
+      <ion-input type="text" formControlName="password" required></ion-input>
+    </ion-item>
+ 
+    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!login_form.valid">Login</ion-button>
+  </form>
 
-</ion-content>
+  <img id='Google' src="assets/imgs/googleLogo.png" alt="Google Login" (click)='loginGoogle()'>
+  
+  <p>
+    Not a user yet? <span> <a (click)='signup()'> Sign Up</a></span>!
+  </p>
+  
+</ion-content> 
