@@ -5,5 +5,24 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-label color="primary" position="floating">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="user.email" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Password</ion-label>
+    <ion-input type="text" [(ngModel)]="user.password" required></ion-input>
+  </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="user.firstName" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="user.lastName" required></ion-input>
+    </ion-item>
+ 
+    <ion-button class="submit-btn" type="submit" (click)="signup()" >Sign Up</ion-button>
+      <ion-button (click)="goBack()"> Cancel</ion-button>
 </ion-content>
+ 

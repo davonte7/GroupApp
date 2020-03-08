@@ -46,28 +46,34 @@ export class LoginPage implements OnInit {
   	var self=this;
 	  var email=item.email;
     var password=item.password;
-    
+    var noErr = true;
+
 	  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 		// Handle Errors here.
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		console.log(errorCode);
-
+    
 		if (errorCode === 'auth/wrong-password') {
             alert('Wrong password.');
+            noErr = false;
           } else if (errorCode === 'auth/user-not-found'){
             alert("User does not exist");
+            noErr = false;
           }
           console.log(error);
+    
 		}
 	).then(function(result){
+    if(noErr === true){
       //Log User In
       var user= firebase.auth().currentUser;
       console.log("Login Successful");
       console.log(user.uid);
 
       //Navigate to Homepage
-		 	self.router.navigate(["home"]);
+       self.router.navigate(["home"]);
+    }
 	});
   }
 
