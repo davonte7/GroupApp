@@ -15,7 +15,7 @@
       <ion-label color="primary" position="floating">password</ion-label>
       <ion-input type="text" formControlName="password" required></ion-input>
     </ion-item>
- 
+    <p id="forgotPassword">Forgot Password? <span> <a (click)='forgotPassword()'> Click Here</a></span>!</p>
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!login_form.valid">Login</ion-button>
   </form>
 
@@ -24,5 +24,7 @@
   <p>
     Not a user yet? <span> <a (click)='signup()'> Sign Up</a></span>!
   </p>
+
+
   
 </ion-content> 

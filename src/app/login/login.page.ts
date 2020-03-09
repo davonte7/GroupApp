@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
 
   login(item){
     //Print & Store User's email and password
-  	console.log(item.email+"   "+item.password)
+  	console.log( "Logging in: " + item.email + "...")
   	var self=this;
 	  var email=item.email;
     var password=item.password;
@@ -75,6 +75,10 @@ export class LoginPage implements OnInit {
        self.router.navigate(["home"]);
     }
 	});
+  }
+
+  forgotPassword(){
+    this.router.navigate(["/forgot-password"])
   }
 
   loginGoogle(){
