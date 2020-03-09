@@ -49,6 +49,7 @@ export class SignupPage implements OnInit {
       console.log(error.message);
       if(errorCode.length > 0){
         console.log("Failed");
+        alert("Signup Failed: " + errorMessage);
       }
       else{
         console.log("Signup successful")
@@ -74,7 +75,7 @@ export class SignupPage implements OnInit {
                 //update this products arrays
             })
             .catch(function(error) {
-                console.error("Error adding document: ", error);
+                console.error("Error adding document: ", error);     
             });
 
           console.log("Finished Creating Account for")

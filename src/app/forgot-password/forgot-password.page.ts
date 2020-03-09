@@ -42,10 +42,17 @@ export class ForgotPasswordPage implements OnInit {
     // Email sent.
     }).catch(function(error) {
     // An error happened.
+    var errorMessage = error.message;
+    if(errorMessage.length > 0){
     console.log(error);
+    alert("An Error Occured: " + errorMessage)
+    }
+    else{
+      console.log("Link has been sent")
+      this.router.navigate(["/login"])
+    }
     });
-    console.log("Link has been sent")
-    this.router.navigate(["/login"])
+
   }
 
   goBack(){

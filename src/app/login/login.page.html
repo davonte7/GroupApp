@@ -15,13 +15,15 @@
       <ion-label color="primary" position="floating">password</ion-label>
       <ion-input type="text" formControlName="password" required></ion-input>
     </ion-item>
-    <p id="forgotPassword">Forgot Password? <span> <a (click)='forgotPassword()'> Click Here</a></span>!</p>
+    <p id="forgotPassword">
+      Forgot Password? <span> <a (click)='forgotPassword()'> Click Here</a></span>!
+    </p>
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!login_form.valid">Login</ion-button>
   </form>
 
   <img id='Google' src="assets/imgs/googleLogo.png" alt="Google Login" (click)='loginGoogle()'>
   
-  <p>
+  <p id="signup">
     Not a user yet? <span> <a (click)='signup()'> Sign Up</a></span>!
   </p>
 
