@@ -27,7 +27,7 @@ export class UserService {
      
       var db = firebase.firestore();
             db.collection("users").add({
-              'uid':firebase.auth().currentUser.uid,
+              'id':firebase.auth().currentUser.uid,
               'email': email,
               'firstName':firstName,
               'lastName':lastName,
@@ -64,6 +64,12 @@ publishEvent(data: any) {
 getObservable(): Subject<any> {
   return this.eventSubject;
 }
+ 
+updateUser(newValues){
+  console.log(newValues.id);
 
+  let newInfo = firebase.database().ref('users/'+newValues.id).update(newValues);
+
+}
 
 }

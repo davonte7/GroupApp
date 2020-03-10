@@ -31,4 +31,8 @@ console.log("Logout Successful")
   goBack(){
     this.router.navigate(["/home"])
   }
+
+  goToEditUser(){
+    this.router.navigate(["/edit-user"])
+  }
 }
