@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 })
 export class UserService {
 
+  private eventSubject = new Subject<any>();
   database = firebase.firestore();
   public users:Array<any>=[  ];
 
@@ -44,9 +45,25 @@ export class UserService {
         .catch(function(error) {
             console.error("Error adding document: ", error);
         });
-  
-  
+}
 
+getUsers():any {
+  var usersObservable = new Observable(observer => {
+         setTimeout(() => {
+             observer.next(this.users);
+         }, 1000);
+  });
+
+  return usersObservable;
 
 }
+
+publishEvent(data: any) {
+  this.eventSubject.next(data);
+}
+getObservable(): Subject<any> {
+  return this.eventSubject;
+}
+
+
 }

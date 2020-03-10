@@ -10,17 +10,18 @@
   </div>
 
   <div id="profile">
-    <h1>First-Name    Last-Name</h1>
-    <p id="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet nulla tristique lorem porttitor eleifend et ac purus. Vivamus in sollicitudin justo, pellentesque rhoncus mauris. Curabitur mattis efficitur risus.</p>
+    <h1 *ngFor= "let user of users">{{user.firstName}}    {{user.lastName}}
+    </h1>
+    <p id="bio" *ngFor= "let user of users">{{user.bio}}</p>
   </div>
 
   <div id="container">
     <div id="contact">
       <h4>Email</h4>
-      <p>someonesemail@gmail.com</p>
+      <p *ngFor= "let user of users">{{user.email}}</p>
 
       <h4>Phone</h4>
-      <p>(123)-456-7890</p>
+      <p *ngFor= "let user of users">{{user.phone}}</p>
     </div>
     <div id="projectNum">
       <h4>Number of Projects</h4>
@@ -37,6 +38,6 @@
 
   <div id="company">
     <h4>Company</h4>
-    <p>User Company with a little length</p>
+    <p *ngFor= "let user of users">{{user.company}}</p>
   </div>
 </ion-content>
