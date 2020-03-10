@@ -1,10 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Log In</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
+  <div id="main">
   <img id='logo' src="assets/imgs/Logo.png" alt="Logo">
   <form [formGroup]="login_form" (submit)="login(login_form.value)">
     <ion-item>
@@ -20,12 +19,13 @@
     </p>
     <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!login_form.valid">Login</ion-button>
   </form>
-
+  
   <img id='Google' src="assets/imgs/googleLogo.png" alt="Google Login" (click)='loginGoogle()'>
   
   <p id="signup">
     Not a user yet? <span> <a (click)='signup()'> Sign Up</a></span>!
   </p>
+</div>
 
 
   
