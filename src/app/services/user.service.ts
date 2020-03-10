@@ -72,4 +72,26 @@ updateUser(newValues){
 
 }
 
+deleteUser(id){
+  var self=this;
+  var db = firebase.firestore();
+  var user = firebase.auth().currentUser;
+  db.collection("users").doc(id).delete().then(function() {
+      console.log("Document successfully deleted!");
+      console.log("Item deleted:"+id)
+      self.router.navigate(["/login"]);
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+
+  user.delete().then(function() {
+    // User deleted.
+  }, function(error) {
+    // An error happened.
+    console.log(error)
+  });
+
+
+}
+
 }

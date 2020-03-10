@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <h1 id="header"> <strong>Deleting your Account</strong></h1>
+  <h4 id="instructions">
+    Deleting your account is a permanent action that can not be reversed. Before deleting your account, you must
+    transfer ownership to another team member for all projects you are the owner of.
+  </h4>
+
+  <ion-button color="danger" id="remove" (click)="deleteAccount()" >Delete Account</ion-button>
+</ion-content>

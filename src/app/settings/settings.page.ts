@@ -35,4 +35,8 @@ console.log("Logout Successful")
   goToEditUser(){
     this.router.navigate(["/edit-user"])
   }
+
+  goToDeleteUser(){
+    this.router.navigate(["/delete-user"])
+  }
 }

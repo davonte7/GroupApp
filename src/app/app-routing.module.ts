@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'edit-user',
     loadChildren: () => import('./edit-user/edit-user.module').then( m => m.EditUserPageModule)
   },
+  {
+    path: 'delete-user',
+    loadChildren: () => import('./delete-user/delete-user.module').then( m => m.DeleteUserPageModule)
+  },
 ];
 
 @NgModule({
