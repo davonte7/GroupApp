@@ -13,19 +13,19 @@
   line-height: 26px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+#profile{
+  width: 30px;
+  height: 30px;
 }
 
-#container a {
-  text-decoration: none;
+#settings{
+  width: 30px;
+  height: 30px;
 }
 
-ion-content ion-toolbar {
-  --background: translucent;
+#header{
+  clear: both;
+  float: right;
+  align-self: center;
+  text-align: center;
 }
