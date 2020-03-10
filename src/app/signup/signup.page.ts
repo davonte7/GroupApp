@@ -9,7 +9,8 @@ import { Router,Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import * as firebase from 'firebase';
-
+import { UserService } from '../services/user.service';
+ 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -25,7 +26,8 @@ export class SignupPage implements OnInit {
 
   constructor(
   	private router: Router,
- 	  public formBuilder: FormBuilder,
+     public formBuilder: FormBuilder,
+     public userService: UserService
  	     ) { 
   }
 
@@ -38,6 +40,8 @@ export class SignupPage implements OnInit {
 
       var email=this.user.email;
       var password=this.user.password;
+      var firstName = this.user.firstName;
+      var lastName = this.user.lastName;
       var self=this;
   
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(
@@ -57,30 +61,10 @@ export class SignupPage implements OnInit {
       }
       // ...
     }).then(function(result){
-        var user= firebase.auth().currentUser;
-         var database = firebase.firestore();
-                database.collection("users").add({
-                  'uid':user.uid,
-                    'email': user.email,
-                    'firstName':self.user.firstName,
-                    'lastName':self.user.lastName,
-                    'bio': "",
-                    'company':"",
-                    'phone':"",
-                    'numOfProjects':0,
-                    'profilePicUrl': ""
-            })
-            .then(function(docRef) {
-                console.log("User created with ID: ", docRef.id);
-  
-                //update this products arrays
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);     
-            });
+        self.userService.createUser(email,firstName,lastName)
 
           console.log("Finished Creating Account for")
-          console.log(user.email)
+          console.log(email)
           self.router.navigate(["/home"]);   
     });
     }

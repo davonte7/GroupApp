@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,7 +15,9 @@ export class HomePage {
   ) {}
 
 
-
+ngOnInit(){
+  console.log("Current User: " + firebase.auth().currentUser.email)
+}
 
   goToSettings(){
     this.router.navigate(["/settings"])
