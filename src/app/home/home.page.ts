@@ -19,4 +19,7 @@ export class HomePage {
     this.router.navigate(["/settings"])
   }
 
+  goToProfile(){
+    this.router.navigate(["/user-profile"])
+  }
 }
