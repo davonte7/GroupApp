@@ -1,0 +1,33 @@
+ion-header{
+    max-height: 100px;
+}
+
+#info{
+    padding-top: 50px;
+}
+
+#logo{
+    max-width: 150px;
+    max-height: 150px;
+    margin: auto;
+    display: block;
+}
+
+#version{
+    text-align: center;
+    font-style: italic;
+}
+
+p{
+    text-align: center;
+    max-width: 300px;
+    margin: auto;
+    display: block;
+}
+
+#logout{
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    width: 374px;
+}
