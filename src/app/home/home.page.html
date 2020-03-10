@@ -9,7 +9,32 @@
 <ion-content>
 
   <div id="container">
-    <strong>Nothing Here Yet</strong>
-    
+    <ion-list>
+      <ion-item>
+        <ion-label><h2>Name</h2></ion-label>
+        <p>% Complete</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><h2>Project 1</h2></ion-label>
+        <p>75%</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><h2>Project 2</h2></ion-label>
+        <p>50%</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><h2>Project 3</h2></ion-label>
+        <p>20%</p>
+      </ion-item>
+    </ion-list>
   </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
