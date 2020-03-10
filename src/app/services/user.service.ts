@@ -68,7 +68,7 @@ getObservable(): Subject<any> {
 updateUser(newValues){
   console.log(newValues.id);
 
-  let newInfo = firebase.database().ref('users/'+newValues.id).update(newValues);
+  firebase.database().ref('users/'+newValues.id).update(newValues);
 
 }
 
