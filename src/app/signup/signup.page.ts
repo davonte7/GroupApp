@@ -50,6 +50,7 @@ export class SignupPage implements OnInit {
       if(errorCode.length > 0){
         console.log("Failed");
         alert("Signup Failed: " + errorMessage);
+        self.router.navigate(["/login"])
       }
       else{
         console.log("Signup successful")
@@ -80,7 +81,7 @@ export class SignupPage implements OnInit {
 
           console.log("Finished Creating Account for")
           console.log(user.email)
-          self.router.navigate(["/home"]);
+          self.router.navigate(["/home"]);   
     });
     }
     goBack(){
