@@ -71,27 +71,40 @@ updateUser(newValues){
   firebase.database().ref('users/'+newValues.id).update(newValues);
 
 }
-
+ 
 deleteUser(id){
   var self=this;
   var db = firebase.firestore();
   var user = firebase.auth().currentUser;
-  db.collection("users").doc(id).delete().then(function() {
-      console.log("Document successfully deleted!");
-      console.log("Item deleted:"+id)
-      self.router.navigate(["/login"]);
-  }).catch(function(error) {
-      console.error("Error removing document: ", error);
-  });
 
+  //Delete Object
+
+  //Get Object
+  db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
+    console.log("User Profile Loading...........");
+    querySnapshot.forEach(function(doc) {
+    var userI = doc.id
+    console.log("User Loaded");
+
+    //Delete Object
+    console.log("Removing user object...");
+    db.collection("users").doc(userI).delete().then(function(){
+      console.log("Object Successfully Deleted")
+    }).catch(function(error) {
+      console.error("Error removing Object: ", error);
+      });
+     
+    });
+  } );
+
+  //Delete User
   user.delete().then(function() {
     // User deleted.
+    console.log("Account Successfully Removed")
   }, function(error) {
     // An error happened.
     console.log(error)
   });
-
-
 }
 
 }

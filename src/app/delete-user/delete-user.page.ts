@@ -18,7 +18,7 @@ export class DeleteUserPage implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   deleteAccount(){
     var db = firebase.firestore();
     var user = firebase.auth().currentUser;
@@ -27,7 +27,6 @@ export class DeleteUserPage implements OnInit {
     console.log("Deleting account for: " +user.email);
     self.userService.deleteUser(user.uid);
 
-    console.log("Account Successfully Deleted");
     this.router.navigate(["/login"]);
   }
 
