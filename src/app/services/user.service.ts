@@ -64,7 +64,7 @@ publishEvent(data: any) {
 getObservable(): Subject<any> {
   return this.eventSubject;
 }
- 
+  
 updateUser(newValues){
   console.log(newValues.id);
 

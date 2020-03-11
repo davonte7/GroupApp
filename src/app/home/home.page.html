@@ -11,27 +11,17 @@
   <div id="container">
     <ion-list>
       <ion-item>
-        <ion-label><h2>Name</h2></ion-label>
-        <p>% Complete</p>
+        <ion-label><h2><strong>Name</strong></h2></ion-label>
+        <p><strong>% Complete</strong></p>
       </ion-item>
 
-      <ion-item>
-        <ion-label><h2>Project 1</h2></ion-label>
-        <p>75%</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-label><h2>Project 2</h2></ion-label>
-        <p>50%</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-label><h2>Project 3</h2></ion-label>
-        <p>20%</p>
+      <ion-item *ngFor="let project of projects">
+        <ion-label><h2> {{project.Name}} </h2></ion-label>
+        <p>% {{project.percentComplete}}</p>
       </ion-item>
     </ion-list>
   </div>
-
+ 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
     <ion-fab-button>
       <ion-icon name="add" (click)="goToCreateProject()"></ion-icon>

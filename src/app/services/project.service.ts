@@ -15,7 +15,7 @@ export class ProjectService {
     public router: Router) {
 
      }
-
+  
      createProject(name,description,dueDate){
       var self=this;
       var user = firebase.auth().currentUser;
@@ -29,7 +29,7 @@ export class ProjectService {
                'dateCreated': (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear(),
                'tasks': [],
                'meetings': [],
-               'team': [],
+               'team': [user.uid],
                'complete': false,
                'percentComplete': 0
             })
