@@ -26,4 +26,8 @@ ngOnInit(){
   goToProfile(){
     this.router.navigate(["/user-profile"])
   }
+
+  goToCreateProject(){
+    this.router.navigate(["/create-project"])
+  }
 }

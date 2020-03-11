@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create a New Project</ion-title>
+    <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-item>
+    <ion-label color="primary" position="floating">Name</ion-label>
+    <ion-input type="text" [(ngModel)]="project.name" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Description</ion-label>
+    <ion-input type="text" [(ngModel)]="project.description" required></ion-input>
+  </ion-item>
+    <ion-item>
+      <ion-label> Due Date (MM/DD/YYYY)</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" min="1994-03-14" max="2050-12-31" [(ngModel)]="project.dueDate" ></ion-datetime>
+    </ion-item>
+ 
+    <ion-button class="submit-btn" type="submit" (click)="createProject()" >Create</ion-button>
+
+</ion-content>
