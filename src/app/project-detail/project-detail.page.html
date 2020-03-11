@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details</ion-title>
+    <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <ion-icon size="large" slot="end" name="pencil-sharp" ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="projectHeader">
+    <h3>
+      {{currentProject.name}}
+    </h3>
+    <p id="description">
+      {{currentProject.description}}
+    </p>
+    <h6>
+      <span class="label">Project Owner:</span> {{owner}}
+      <br>
+      <span class="label">Due Date:</span> {{currentProject.dueDate}}
+    </h6>
+  </div>
+
+  <div id="container">
+    <div id="team">
+      <ion-label>
+        Team
+      </ion-label>
+      <ion-list>
+        <ion-item *ngFor="let member of team">
+          {{member}}
+        </ion-item>
+      </ion-list>
+    </div>
+    <div id="tasks">
+      <ion-label>
+        Tasks
+      </ion-label>
+      <ion-list>
+        <ion-item>
+          Task 1
+        </ion-item>
+        <ion-item>
+          Task 2
+        </ion-item>
+      </ion-list>
+    </div>
+    <div id=meetings>
+      <ion-label>
+        Meetings
+      </ion-label>
+      <ion-list>
+        <ion-item>
+          Meeting Closest
+        </ion-item>
+        <ion-item>
+          Meeting Furthest
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+ 
+  <h4 id="cDate">
+    Created on: {{currentProject.dateCreated}}
+  </h4>
+
+
+</ion-content>

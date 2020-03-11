@@ -65,7 +65,7 @@ export class SignupPage implements OnInit {
 
           console.log("Finished Creating Account for")
           console.log(email)
-          self.router.navigate(["/home"]);   
+          self.router.navigate(["/login"]);   
     });
     }
     goBack(){

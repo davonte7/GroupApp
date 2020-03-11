@@ -1,0 +1,63 @@
+ion-content{
+    text-align: center;
+}
+
+#projectHeader{
+    border-bottom-style: solid;
+    border-width: thin;
+    margin-top: 5%;
+    max-height: 25%;
+    overflow-y: auto;
+    
+}
+.label{
+    font-style: italic;
+}
+#container{
+    height: 60%;
+    margin-top: 5%;
+    }
+
+    #team{
+        border-style: solid;
+        border-width: thin;
+        width: 29%;
+        margin-right: 2%;
+        max-height: 100%;
+        overflow-y: auto; 
+        overflow-x: visible;
+        float: left;
+    }
+
+    #tasks{
+        border-style: solid;
+        border-width: thin;
+        width: 38%;
+        max-height: 100%;
+        overflow-x: scroll;
+        overflow-y: auto; 
+        float: left;
+    }
+
+    #meetings{
+        border-style: solid;
+        border-width: thin;
+        width: 28%;
+        margin-left: 2%;
+        margin-right: 1%;
+        max-height: 100%;
+        overflow-x: scroll;
+        overflow-y: auto; 
+        float: right;
+    }
+
+ 
+#cDate{
+    position: fixed;
+    bottom: 1%;
+    left: 20%;
+    right: 20%;
+    margin: auto;
+    display: inline;
+    }
+    

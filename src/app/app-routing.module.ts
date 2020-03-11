@@ -36,6 +36,10 @@ const routes: Routes = [
     path: 'create-project',
     loadChildren: () => import('./create-project/create-project.module').then( m => m.CreateProjectPageModule)
   },
+  {
+    path: 'project-detail',
+    loadChildren: () => import('./project-detail/project-detail.module').then( m => m.ProjectDetailPageModule)
+  },
 ];
 
 @NgModule({

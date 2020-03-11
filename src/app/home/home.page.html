@@ -14,9 +14,8 @@
         <ion-label><h2><strong>Name</strong></h2></ion-label>
         <p><strong>% Complete</strong></p>
       </ion-item>
-
-      <ion-item *ngFor="let project of projects">
-        <ion-label><h2> {{project.Name}} </h2></ion-label>
+      <ion-item *ngFor="let project of projects" (click)="goToProject(project)">
+        <ion-label><h2> {{project.name}} </h2></ion-label>
         <p>% {{project.percentComplete}}</p>
       </ion-item>
     </ion-list>
@@ -28,3 +27,4 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+ 

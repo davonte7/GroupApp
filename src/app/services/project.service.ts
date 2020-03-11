@@ -21,6 +21,9 @@ export class ProjectService {
       var user = firebase.auth().currentUser;
       var now = new Date();
       var db = firebase.firestore();
+      var team :string[] = [];
+      team.push(user.uid);
+      
             db.collection("projects").add({
                'name':name,
                'description':description,
@@ -29,7 +32,7 @@ export class ProjectService {
                'dateCreated': (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear(),
                'tasks': [],
                'meetings': [],
-               'team': [user.uid],
+               'team': team,
                'complete': false,
                'percentComplete': 0
             })

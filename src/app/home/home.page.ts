@@ -27,15 +27,19 @@ export class HomePage {
     querySnapshot.forEach(function(doc) {
     var projectI = doc.data();
     var projectId = doc.id;
-      for(var i = 0; i < self.projects.length; i++){
-        if(projectId === self.projects[i].projectId )
-        {
-          console.log("Already Here")
-        }
-      }
-    
+     
     //Add Projects to Array
-    self.projects.push({Name:projectI.name,percentComplete: projectI.percentComplete,id:projectId});
+    self.projects.push({               
+    name:projectI.name,
+    description:projectI.description,
+    dueDate: projectI.dueDate,
+    owner: projectI.owner,
+    dateCreated: projectI.dateCreated,
+    tasks: projectI.tasks,
+    meetings: projectI.meetings,
+    team: projectI.team,
+    complete: projectI.complete,
+    percentComplete: projectI.percentComplete});
   });
     console.log(self.projects);
     console.log("Projects Loaded");
@@ -57,5 +61,10 @@ ngOnInit(){
 
   goToCreateProject(){
     this.router.navigate(["/create-project"])
+  }
+
+  goToProject(project){
+    console.log("Getting Details for: " + project.Name);
+    this.router.navigate(["project-detail",project])
   }
 }
