@@ -22,6 +22,8 @@ export class ProjectService {
       var now = new Date();
       var db = firebase.firestore();
       var team :string[] = [];
+      var meetings =[];
+      var tasks =[];
       team.push(user.uid);
       
             db.collection("projects").add({
@@ -30,8 +32,8 @@ export class ProjectService {
                'dueDate': dueDate,
                'owner': user.uid,
                'dateCreated': (now.getMonth()+1) + "/" + now.getDate() + "/" + now.getFullYear(),
-               'tasks': [],
-               'meetings': [],
+               'tasks': tasks,
+               'meetings': meetings,
                'team': team,
                'complete': false,
                'percentComplete': 0
