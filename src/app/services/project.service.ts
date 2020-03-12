@@ -77,9 +77,10 @@ export class ProjectService {
 }
 
 updateProject(newValues){
+ 
+  
 
-  console.log(newValues.id);
-  /*
+   console.log(newValues.id);
   var db = firebase.firestore()
   var projectRef = db.collection("projects").doc(newValues.id);
  
@@ -97,7 +98,7 @@ updateProject(newValues){
       // The document probably doesn't exist.
       console.error("Error updating document: ", error);
   });
-*/
+
     //Update Project
     firebase.database().ref('projects/'+newValues.id).update(newValues);
 
