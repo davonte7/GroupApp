@@ -22,7 +22,7 @@ export class MeetingService {
             'id':id,
             'time': date,
             'location':location,
-            'projectID':projectId
+            'projectId':projectId
           })
       .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);

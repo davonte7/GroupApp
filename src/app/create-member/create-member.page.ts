@@ -24,6 +24,11 @@ export class CreateMemberPage implements OnInit {
       )
     }
 
+  addMember(){
+
+    this.goBack();
+  }
+
   goBack(){
     this.router.navigate(["/project-detail",this.currentProject])
   }

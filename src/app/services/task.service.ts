@@ -14,8 +14,27 @@ export class TaskService {
   constructor( private storage: Storage,
     public router: Router) { }
 
-  createTask(){
-    
+  createTask(title,description,emails,percentage,projectId){
+    var self=this;
+    var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
+    var db = firebase.firestore();
+          db.collection("tasks").add({
+            'id':id,
+            'title': title,
+            'description':description,
+            'emails':emails,
+            'percentage': percentage,
+            'projectId':projectId,
+            'complete': false
+          })
+      .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          
+          //update this products arrays
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
 }
 
 deleteTask(id){

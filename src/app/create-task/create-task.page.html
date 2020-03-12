@@ -6,5 +6,21 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-label color="primary" position="floating">Title</ion-label>
+    <ion-input type="text" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Description</ion-label>
+    <ion-input type="text" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Members Emails</ion-label>
+    <ion-input type="email" multiple="true" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="floating">Percentage of Project</ion-label>
+    <ion-input type="number" ></ion-input>
+  </ion-item>
+  <ion-button class="submit-btn" type="submit" (click)="createTask()">Create</ion-button>
 </ion-content>

@@ -26,6 +26,12 @@ export class CreateTaskPage implements OnInit {
       )
     }
 
+  createTask(){
+
+
+    this.goBack();
+  }
+
   goBack(){
     this.router.navigate(["/project-detail",this.currentProject])
   }
