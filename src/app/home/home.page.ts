@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import * as firebase from 'firebase';
 import { ProjectService } from '../services/project.service';
@@ -16,14 +16,22 @@ export class HomePage {
   constructor(
     private router: Router,
     public projectService: ProjectService,
+    private route: ActivatedRoute,
     public userService: UserService
   ) {
-    var db = firebase.firestore();
-    var self = this;
-    var user = firebase.auth().currentUser;
 
-    var ref = firebase.database().ref("projects/");
-    ref.on('value', resp =>{console.log("items loaded")})
+  }
+
+
+ngOnInit(){
+  var self = this;
+  console.log("Current User: " + firebase.auth().currentUser.email)
+  this.route.params.subscribe(param => { 
+    console.log("Reseting Projects");
+    var db = firebase.firestore();
+    
+    var user = firebase.auth().currentUser;
+    this.projects = [];
 
     //Loop Through Projects with Current User in team array
   db.collection("projects").where("team", "array-contains",user.uid).onSnapshot(function(querySnapshot) {
@@ -31,7 +39,7 @@ export class HomePage {
     querySnapshot.forEach(function(doc) {
     var projectI = doc.data();
     var projectId = doc.id;
-     
+      
     //Add Projects to Array
     self.projects.push({    
     id:projectI.id,           
@@ -49,12 +57,7 @@ export class HomePage {
     console.log(self.projects);
     console.log("Projects Loaded");
 } )
-  }
-
-
-ngOnInit(){
-  console.log("Current User: " + firebase.auth().currentUser.email)
-
+   })
 }
  
   goToSettings(){
