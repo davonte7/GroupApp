@@ -31,7 +31,8 @@ export class EditUserPage implements OnInit {
           lastName: new FormControl("", Validators.required),
           bio: new FormControl("", Validators.required),
           phone: new FormControl("", Validators.required),
-          company: new FormControl("", Validators.required)
+          company: new FormControl("", Validators.required),
+          URL: new FormControl("", Validators.required)
         });
   }
 
@@ -85,7 +86,7 @@ export class EditUserPage implements OnInit {
   });
 } )
   }
- 
+  
   goBack(){
     this.router.navigate(["/settings"])
   }

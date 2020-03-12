@@ -27,7 +27,10 @@
       <ion-label color="primary" position="floating">Company</ion-label>
       <ion-input type="text" formControlName="company" ></ion-input>
     </ion-item>
-    
+    <ion-label color="primary" position="floating">Update Profile Picture</ion-label>
+    <ion-item>
+      <ion-input type="file" formControlName="URL" multiple="false" accept="image/*" ></ion-input>
+    </ion-item>
     <ion-button class="submit-btn" expand="block" type="submit" >Update</ion-button>
   </form>
 </ion-content>
