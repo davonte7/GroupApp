@@ -53,4 +53,8 @@ export class ProjectDetailPage implements OnInit {
     this.router.navigate(["home"])
   }
 
+  goToEdit(){
+    this.router.navigate(["edit-project",this.currentProject]);
+  }
+
 }

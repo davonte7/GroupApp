@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'project-detail',
     loadChildren: () => import('./project-detail/project-detail.module').then( m => m.ProjectDetailPageModule)
   },
+  {
+    path: 'edit-project',
+    loadChildren: () => import('./edit-project/edit-project.module').then( m => m.EditProjectPageModule)
+  },
 ];
 
 @NgModule({

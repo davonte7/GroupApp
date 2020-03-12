@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import {Subject} from 'rxjs';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,11 @@ export class ProjectService {
       var team :string[] = [];
       var meetings =[];
       var tasks =[];
+      var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       team.push(user.uid);
       
             db.collection("projects").add({
+               'id': id,
                'name':name,
                'description':description,
                'dueDate': dueDate,
@@ -48,21 +51,32 @@ export class ProjectService {
         });
 }
 
-    deleteItem(id){
+    deleteProject(id){
       var self=this;
       var db = firebase.firestore();
+      var projectId;
+      console.log(id);
+
+      //Get Project
+    db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+      projectId = doc.id; 
+      console.log(projectId);
 
       //Delete Project
-      db.collection("projects").doc(id).delete().then(function() {
-        console.log("Document successfully deleted!");
-        console.log("Project deleted")
-        self.router.navigate(["home"]);
+      db.collection("projects").doc(projectId).delete().then(function() {
+        console.log("Document successfully deleted");
+        console.log("Project deleted");
       }).catch(function(error) {
           console.error("Error removing document: ", error);
         });
+
+      })
+    } )
+        
 }
 
-updateUser(newValues){
+updateProject(newValues){
   console.log(newValues.id);
 
   //Update Project

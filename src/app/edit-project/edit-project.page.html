@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <ion-icon size="large" slot="end" name="trash-sharp" (click)="deleteProject()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <form [formGroup]="edit_project_form" (submit)="updateProject(edit_project_form.value)">
+    <ion-item>
+      <ion-label color="primary" position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input type="text" formControlName="description" required></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-label color="primary" position="floating">Due Date</ion-label>
+      <ion-input type="date" formControlName="dueDate" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" position="floating">Complete</ion-label>
+      <ion-input type="text" formControlName="complete" ></ion-input>
+    </ion-item>
+    
+    <ion-button class="submit-btn" expand="block" type="submit" >Update</ion-button>
+  </form>
+</ion-content>

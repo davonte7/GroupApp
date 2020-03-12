@@ -21,6 +21,10 @@ export class HomePage {
     var db = firebase.firestore();
     var self = this;
     var user = firebase.auth().currentUser;
+
+    var ref = firebase.database().ref("projects/");
+    ref.on('value', resp =>{console.log("items loaded")})
+
     //Loop Through Projects with Current User in team array
   db.collection("projects").where("team", "array-contains",user.uid).onSnapshot(function(querySnapshot) {
     console.log("Projects for " + user.email + " Loading......");
@@ -29,7 +33,8 @@ export class HomePage {
     var projectId = doc.id;
      
     //Add Projects to Array
-    self.projects.push({               
+    self.projects.push({    
+    id:projectI.id,           
     name:projectI.name,
     description:projectI.description,
     dueDate: projectI.dueDate,
@@ -49,6 +54,7 @@ export class HomePage {
 
 ngOnInit(){
   console.log("Current User: " + firebase.auth().currentUser.email)
+
 }
  
   goToSettings(){
