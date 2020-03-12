@@ -69,13 +69,13 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="instagram">
+      <ion-fab-button color="instagram" (click)="goToAddMember()">
         <ion-icon name="person-add"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="instagram">
+      <ion-fab-button color="instagram" (click)=" goToCreateTask()">
         <ion-icon name="newspaper"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="twitter" >
+      <ion-fab-button color="twitter" (click)="goToCreateMeeting()">
         <ion-icon name="calendar-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>

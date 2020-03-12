@@ -57,4 +57,15 @@ export class ProjectDetailPage implements OnInit {
     this.router.navigate(["edit-project",this.currentProject]);
   }
 
+  goToCreateMeeting(){
+    this.router.navigate(["create-meeting",this.currentProject]);
+  }
+
+  goToAddMember(){
+    this.router.navigate(["create-member",this.currentProject]);
+  }
+
+  goToCreateTask(){
+    this.router.navigate(["create-task",this.currentProject]);
+  }
 }
