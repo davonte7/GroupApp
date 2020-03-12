@@ -14,8 +14,24 @@ export class MeetingService {
   constructor( private storage: Storage,
     public router: Router) { }
 
-  createMeeting(){
-    
+  createMeeting(date,location,projectId){
+    var self=this;
+    var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
+    var db = firebase.firestore();
+          db.collection("meetings").add({
+            'id':id,
+            'time': date,
+            'location':location,
+            'projectID':projectId
+          })
+      .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          
+          //update this products arrays
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+      });
 }
 
 deleteMeeting(id){
