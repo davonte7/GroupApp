@@ -51,24 +51,26 @@ export class EditProjectPage implements OnInit {
     var db = firebase.firestore();
     var self = this;
     var project;
+    var newValues;
+    var projectId;
     var id = this.currentProject.id;
     db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
       project = doc.data(); 
-
+      projectId = doc.id;
     console.log("Updating Values");
 
-    let newValues = {
-      id: project.id,
+    newValues = {
+      id: projectId,
       name: value.name,
       description: value.description,
       dueDate: value.dueDate,
       complete: value.complete,
     }
-    self.projectService.updateProject(newValues);
+    
   })
+  self.projectService.updateProject(newValues);
 } )
-    this.goBack();
   }
 
   deleteProject(){

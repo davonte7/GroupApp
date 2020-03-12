@@ -61,7 +61,7 @@ export class EditUserPage implements OnInit {
   } )
 
   }
-
+ 
   updateUser(value){
     var db =firebase.firestore()
     var user;
@@ -71,20 +71,24 @@ export class EditUserPage implements OnInit {
     db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
       user = doc.data(); 
+      var userId = doc.id;
 
       //New Values to Plug In
     console.log("Updating Values");
     let newValues = {
-      id: user.id,
+      id: userId,
       firstName: value.firstName,
       lastName: value.lastName,
       bio: value.bio,
       phone: value.phone,
-      company: value.company
+      company: value.company,
+      URL: value.URL
     }
     self.userService.updateUser(newValues);
+    
   });
 } )
+    this.goBack();
   }
   
   goBack(){

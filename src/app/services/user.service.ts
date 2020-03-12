@@ -67,8 +67,25 @@ getObservable(): Subject<any> {
   
 updateUser(newValues){
   console.log(newValues.id);
-
-  firebase.database().ref('users/'+newValues.id).update(newValues);
+  var db = firebase.firestore()
+  var userRef = db.collection("users").doc(newValues.id);
+ 
+  // Update Values
+  return userRef.update({
+    firstName: newValues.firstName,
+    lastName: newValues.lastName,
+    bio: newValues.bio,
+    phone: newValues.phone,
+    company: newValues.company,
+    profilePicUrl: newValues.URL
+  })
+  .then(function() {
+      console.log("Document successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  });
 
 }
  

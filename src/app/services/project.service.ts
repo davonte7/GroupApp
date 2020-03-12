@@ -77,10 +77,29 @@ export class ProjectService {
 }
 
 updateProject(newValues){
-  console.log(newValues.id);
 
-  //Update Project
-  firebase.database().ref('projects/'+newValues.id).update(newValues);
+  console.log(newValues.id);
+  /*
+  var db = firebase.firestore()
+  var projectRef = db.collection("projects").doc(newValues.id);
+ 
+  // Update Values
+  return projectRef.update({
+    name: newValues.name,
+    description: newValues.description,
+    dueDate: newValues.dueDate,
+    complete: newValues.complete,
+  })
+  .then(function() {
+      console.log("Document successfully updated!");
+  })
+  .catch(function(error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  });
+*/
+    //Update Project
+    firebase.database().ref('projects/'+newValues.id).update(newValues);
 
 }
     }

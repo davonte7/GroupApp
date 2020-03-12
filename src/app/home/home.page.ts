@@ -41,6 +41,10 @@ ngOnInit(){
     var projectId = doc.id;
       
     //Add Projects to Array
+    if(projectI.id in self.projects){
+      console.log("Already Here")
+    }
+    else{
     self.projects.push({    
     id:projectI.id,           
     name:projectI.name,
@@ -52,7 +56,9 @@ ngOnInit(){
     meetings: projectI.meetings,
     team: projectI.team,
     complete: projectI.complete,
-    percentComplete: projectI.percentComplete});
+    percentComplete: projectI.percentComplete
+  });
+}
   });
     console.log(self.projects);
     console.log("Projects Loaded");
