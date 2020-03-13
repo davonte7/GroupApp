@@ -56,7 +56,7 @@ export class CreateProjectPage implements OnInit {
     this.projectService.createProject(name,description,dueDate)
 
     console.log("Project Created");
-    //this.userService.countProject(firebase.auth().currentUser.uid);
+    this.userService.countProject(firebase.auth().currentUser.uid);
     this.router.navigate(["/home"])
 
  

@@ -66,28 +66,26 @@ export class EditUserPage implements OnInit {
     var db =firebase.firestore()
     var user;
     var self = this;
+    var docId;
+    var newValues;
 
-    //Get Specific User
-    db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-      user = doc.data(); 
-      var userId = doc.id;
+    db.collection("users").where("id","==",firebase.auth().currentUser.uid).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
 
-      //New Values to Plug In
-    console.log("Updating Values");
-    let newValues = {
-      id: userId,
-      firstName: value.firstName,
-      lastName: value.lastName,
-      bio: value.bio,
-      phone: value.phone,
-      company: value.company,
-      URL: value.URL
-    }
-    self.userService.updateUser(newValues);
-    
+      docId = doc.id;
+
+      newValues = {
+        id: docId,
+        firstName: value.firstName,
+        lastName: value.lastName,
+        bio: value.bio,
+        phone: value.phone,
+        company: value.company,
+        URL: value.URL
+      }
+      self.userService.updateUser(newValues);
+    })
   });
-} )
+
     this.goBack();
   }
   

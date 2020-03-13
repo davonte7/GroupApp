@@ -4,6 +4,7 @@ import {  Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms
 import { Router,ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import * as firebase from 'firebase';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-edit-project',
@@ -18,7 +19,8 @@ export class EditProjectPage implements OnInit {
   constructor(  	private router: Router,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    public userService: UserService
    ) { 
                //Creates Form to update User
                this.edit_project_form = this.formBuilder.group({
@@ -50,35 +52,35 @@ export class EditProjectPage implements OnInit {
   updateProject(value){
     var db = firebase.firestore();
     var self = this;
-    var project;
     var newValues;
     var projectId;
     var id = this.currentProject.id;
-    db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-      project = doc.data(); 
-      projectId = doc.id;
-    console.log("Updating Values");
 
-    newValues = {
-      id: projectId,
-      name: value.name,
-      description: value.description,
-      dueDate: value.dueDate,
-      complete: value.complete,
-    }
-    
-  })
-  self.projectService.updateProject(newValues);
-} )
+
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+
+      projectId = doc.id;
+
+      newValues = {
+        id: projectId,
+        name: value.name,
+        description: value.description,
+        dueDate: value.dueDate,
+        complete: value.complete,
+      }
+      self.projectService.updateProject(newValues);
+    })
+  });
+ 
+    this.goBack();
   }
 
   deleteProject(){
     console.log("Deleting project: " + this.currentProject.name);
 
     //Delete Project
-    this.projectService.deleteProject(this.currentProject.id)
-
+    this.projectService.deleteProject(this.currentProject.id);
+    this.userService.minusProject(firebase.auth().currentUser.uid);
     this.router.navigate(["home"]);
   }
   goBack(){

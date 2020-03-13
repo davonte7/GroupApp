@@ -78,14 +78,12 @@ export class ProjectService {
 
 updateProject(newValues){
  
-  
-
    console.log(newValues.id);
   var db = firebase.firestore()
   var projectRef = db.collection("projects").doc(newValues.id);
  
   // Update Values
-  return projectRef.update({
+   projectRef.update({
     name: newValues.name,
     description: newValues.description,
     dueDate: newValues.dueDate,
