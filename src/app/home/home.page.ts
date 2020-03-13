@@ -33,36 +33,32 @@ ngOnInit(){
     var user = firebase.auth().currentUser;
     this.projects = [];
 
-    //Loop Through Projects with Current User in team array
-  db.collection("projects").where("team", "array-contains",user.uid).onSnapshot(function(querySnapshot) {
-    console.log("Projects for " + user.email + " Loading......");
-    querySnapshot.forEach(function(doc) {
-    var projectI = doc.data();
-    var projectId = doc.id;
-      
-    //Add Projects to Array
-    if(projectI.id in self.projects){
-      console.log("Already Here")
-    }
-    else{
-    self.projects.push({    
-    id:projectI.id,           
-    name:projectI.name,
-    description:projectI.description,
-    dueDate: projectI.dueDate,
-    owner: projectI.owner,
-    dateCreated: projectI.dateCreated,
-    tasks: projectI.tasks,
-    meetings: projectI.meetings,
-    team: projectI.team,
-    complete: projectI.complete,
-    percentComplete: projectI.percentComplete
-  });
-}
-  });
-    console.log(self.projects);
-    console.log("Projects Loaded");
+//////
+db.collection("projects").where("team", "array-contains",user.uid).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+  console.log("Projects for " + user.email + " Loading......");
+  var projectI = doc.data();
+  var projectId = doc.id;
+     
+  //Add Projects to Array
+  self.projects.push({    
+  id:projectI.id,           
+  name:projectI.name,
+  description:projectI.description,
+  dueDate: projectI.dueDate,
+  owner: projectI.owner,
+  dateCreated: projectI.dateCreated,
+  tasks: projectI.tasks,
+  meetings: projectI.meetings,
+  team: projectI.team,
+  complete: projectI.complete,
+  percentComplete: projectI.percentComplete
+});
+
+  console.log(self.projects);
+  console.log("Projects Loaded");
 } )
+ })
+
    })
 }
  
