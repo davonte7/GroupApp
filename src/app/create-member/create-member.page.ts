@@ -11,6 +11,10 @@ export class CreateMemberPage implements OnInit {
 
   public currentProject: any;
 
+  member = {
+    email: ""
+  }
+
   constructor(    
     private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -25,7 +29,9 @@ export class CreateMemberPage implements OnInit {
     }
 
   addMember(){
-
+    var email = this.member.email;
+    var projectId = this.currentProject.id;
+    this.projectService.addMember(projectId,email,this.currentProject.id)
     this.goBack();
   }
 

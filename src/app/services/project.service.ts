@@ -17,7 +17,7 @@ export class ProjectService {
 
      }
   
-     createProject(name,description,dueDate){
+    createProject(name,description,dueDate){
       var self=this;
       var user = firebase.auth().currentUser;
       var now = new Date();
@@ -76,7 +76,7 @@ export class ProjectService {
         
 }
 
-updateProject(newValues){
+    updateProject(newValues){
  
    console.log(newValues.id);
   var db = firebase.firestore()
@@ -101,5 +101,68 @@ updateProject(newValues){
     firebase.database().ref('projects/'+newValues.id).update(newValues);
 
 }
+
+    addMeeting(id,meeting){
+
+      console.log(id);
+      var db = firebase.firestore();
+
+
+      db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var projectId = doc.id;
+        var projectRef = db.collection("projects").doc(projectId);
+  
+        projectRef.update({
+          meetings: firebase.firestore.FieldValue.arrayUnion(meeting)
+        })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+      });
+  
+      })
+    });
+
     }
- 
+
+    
+
+    addTask(){
+
+    }
+
+    addMember(id, email, projectId){
+      console.log(id);
+      var db = firebase.firestore();
+      var member;
+      db.collection("users").where("email","==",email).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var user = doc.data();
+        id = doc.id
+        member = user.id;
+  
+        db.collection("projects").where("id","==",projectId).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+          var projectId = doc.id;
+          var projectRef = db.collection("projects").doc(projectId);
+    
+          projectRef.update({
+            team: firebase.firestore.FieldValue.arrayUnion(member)
+          })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+      });
+
+    });
+
+     
+    });
+  });
+  });
+  }
+}

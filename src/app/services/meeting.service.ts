@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import {Subject} from 'rxjs';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import {Subject} from 'rxjs';
 export class MeetingService {
 
   constructor( private storage: Storage,
+    private projectService: ProjectService,
     public router: Router) { }
 
   createMeeting(date,location,projectId){
@@ -32,6 +34,16 @@ export class MeetingService {
       .catch(function(error) {
           console.error("Error adding document: ", error);
       });
+
+
+      db.collection("meetings").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var meeting = doc.data();
+         
+        this.projectService.addMeeting(projectId,meeting);
+
+      })
+    });
+      
 }
 
 deleteMeeting(id){

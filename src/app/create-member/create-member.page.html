@@ -7,12 +7,8 @@
 
 <ion-content>
   <ion-item>
-    <ion-label color="primary" position="floating">New Member's Name</ion-label>
-    <ion-input type="text" ></ion-input>
-  </ion-item>
-  <ion-item>
     <ion-label color="primary" position="floating">New Member's Email</ion-label>
-    <ion-input type="text" ></ion-input>
+    <ion-input type="text"  [(ngModel)]="member.email" required></ion-input>
   </ion-item>
   <ion-button class="submit-btn" type="submit" (click)="addMember()">Add</ion-button>
 </ion-content>
