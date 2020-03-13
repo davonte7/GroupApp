@@ -88,7 +88,43 @@ updateUser(newValues){
   });
 
 }
- 
+/*
+  countProject(id){
+
+    console.log(id);
+    var db = firebase.firestore()
+
+    var number = 0 ;
+    var docID;
+
+    db.collection("users").where("id", "==",id).onSnapshot(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+      var user = doc.data(); 
+      docID = doc.id
+      number = user.numOfProjects + 1;
+
+      var userRef = db.collection("users").doc(docID);
+      // Update Values
+      return userRef.update({
+          numOfProjects:number
+      })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+      });
+      })
+    });
+
+
+  }
+
+  minusProject(id){
+
+  }
+*/
 deleteUser(id){
   var self=this;
   var db = firebase.firestore();

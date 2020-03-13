@@ -4,6 +4,7 @@ import { ProjectService } from '../services/project.service';
 
 import * as firebase from 'firebase';
 import { FormBuilder } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-create-project',
@@ -29,7 +30,8 @@ export class CreateProjectPage implements OnInit {
 
   constructor(private router: Router,
     public projectService: ProjectService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public userService: UserService
     ) { }
 
   ngOnInit() {
@@ -54,8 +56,10 @@ export class CreateProjectPage implements OnInit {
     this.projectService.createProject(name,description,dueDate)
 
     console.log("Project Created");
+    //this.userService.countProject(firebase.auth().currentUser.uid);
     this.router.navigate(["/home"])
 
+ 
   }
 
   goBack(){
