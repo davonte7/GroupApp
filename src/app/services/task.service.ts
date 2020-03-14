@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import {Subject} from 'rxjs';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ import {Subject} from 'rxjs';
 export class TaskService {
 
   constructor( private storage: Storage,
+    private projectService: ProjectService,
     public router: Router) { }
-
+ 
   createTask(title,description,emails,percentage,projectId){
     var self=this;
     var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
@@ -35,6 +37,14 @@ export class TaskService {
       .catch(function(error) {
           console.error("Error adding document: ", error);
       });
+
+      db.collection("tasks").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var task = doc.data();
+         
+        this.projectService.addTask(projectId,task);
+
+      })
+    });
 }
 
 deleteTask(id){

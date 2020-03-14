@@ -130,8 +130,29 @@ export class ProjectService {
 
     
 
-    addTask(){
+    addTask(id, task){
 
+      console.log(id);
+      var db = firebase.firestore();
+
+
+      db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var projectId = doc.id;
+        var projectRef = db.collection("projects").doc(projectId);
+  
+        projectRef.update({
+          tasks: firebase.firestore.FieldValue.arrayUnion(task)
+        })
+      .then(function() {
+          console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+      });
+  
+      })
+    });
     }
 
     addMember(id, email, projectId){

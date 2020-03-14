@@ -11,6 +11,12 @@ import { TaskService } from '../services/task.service';
 export class CreateTaskPage implements OnInit {
 
   public currentProject: any;
+  task ={
+    title:"",
+    description:"",
+    emails: "",
+    percent: 0
+  }
 
   constructor(    
     private route: ActivatedRoute,
@@ -27,8 +33,12 @@ export class CreateTaskPage implements OnInit {
     }
 
   createTask(){
-
-
+    console.log("Creating Task For: ");
+    var title = this.task.title;
+    var description = this.task.description;
+    var emails = this.task.emails.split(" ");
+    var percent = this.task.percent;
+    this.taskService.createTask(title,description,emails,percent, this.currentProject.id);
     this.goBack();
   }
 
