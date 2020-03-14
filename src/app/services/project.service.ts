@@ -97,9 +97,6 @@ export class ProjectService {
       console.error("Error updating document: ", error);
   });
 
-    //Update Project
-    firebase.database().ref('projects/'+newValues.id).update(newValues);
-
 }
 
     addMeeting(id,meeting){

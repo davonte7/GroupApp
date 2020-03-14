@@ -12,41 +12,46 @@ import * as firebase from 'firebase';
 })
 export class ProjectDetailPage implements OnInit {
   public currentProject: any;
-   public team: string[] = [];
+   public team ;
+   public names;
    public owner: any;
+   public meetings: [];
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router
-  ) { }
+  ) { 
+    
+  }
   
   ngOnInit() {
     console.log("Loading Clicked Project")
     this.route.params.subscribe(
         param => {
+          this.names = [];
+          this.team = [];
           this.currentProject = param;
           console.log(param);
           this.team = this.currentProject.team.split(',');
-          console.log(this.team);
-          this.getOwner(this.currentProject.owner);
+          this.getNames();
         }
     )
   } // End of Init
 
-  getOwner(id:string){
+  getNames(){
     var db = firebase.firestore();
     var self = this;
 
-    //Find user with id of owner
-  db.collection("users").where("id", "==",id).onSnapshot(function(querySnapshot) {
-    console.log("Getting Name for Owner......");
-    querySnapshot.forEach(function(doc) {
-    var user = doc.data();
-    //Set Owner variable to owner name
-    self.owner = String(user.firstName + " " + user.lastName);
-    console.log("Name Retrieved")
-  });
-})
+    for(var i = 0; i < this.team.length; i++){
+      db.collection("users").where("id","==",self.team[i]).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var user = doc.data();
+      var name = String(user.firstName + " " + user.lastName);
+      self.names.push(name);
+      console.log("Name Retrieved")
+  })
+});
+}
+
   }
 
   goBack(){
