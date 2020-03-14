@@ -56,6 +56,18 @@ const routes: Routes = [
     path: 'create-task',
     loadChildren: () => import('./create-task/create-task.module').then( m => m.CreateTaskPageModule)
   },
+  {
+    path: 'tasks-details',
+    loadChildren: () => import('./tasks-details/tasks-details.module').then( m => m.TasksDetailsPageModule)
+  },
+  {
+    path: 'meetings-details',
+    loadChildren: () => import('./meetings-details/meetings-details.module').then( m => m.MeetingsDetailsPageModule)
+  },
+  {
+    path: 'member-details',
+    loadChildren: () => import('./member-details/member-details.module').then( m => m.MemberDetailsPageModule)
+  },
 ];
 
 @NgModule({

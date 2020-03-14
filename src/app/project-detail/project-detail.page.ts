@@ -19,7 +19,7 @@ export class ProjectDetailPage implements OnInit {
     private projectService: ProjectService,
     private router: Router
   ) { }
- 
+  
   ngOnInit() {
     console.log("Loading Clicked Project")
     this.route.params.subscribe(
@@ -67,5 +67,16 @@ export class ProjectDetailPage implements OnInit {
 
   goToCreateTask(){
     this.router.navigate(["create-task",this.currentProject]);
+  }
+
+  goToTasks(){
+    this.router.navigate(["tasks-details", this.currentProject]);
+  }
+ 
+  goToMeetings(){
+    this.router.navigate(["meetings-details", this.currentProject]);
+  }
+  goToMember(member){
+    this.router.navigate(["member-details",this.currentProject]);
   }
 }
