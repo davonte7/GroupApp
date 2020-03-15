@@ -6,5 +6,20 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-label>
+      In-Progress
+    </ion-label>
+    <ion-item *ngFor="let task of tasks">
+      {{task}}
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-label>
+      Completed
+    </ion-label>
+    <ion-item *ngFor="let task of tasks">
+      {{task}}
+    </ion-item>
+  </ion-list>
 </ion-content>

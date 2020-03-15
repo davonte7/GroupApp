@@ -4,7 +4,7 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { Router,ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import * as firebase from 'firebase';
-
+ 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.page.html',
@@ -53,6 +53,7 @@ export class ProjectDetailPage implements OnInit {
             console.log("Meetings Retrieved")
         })
       });
+        //Get Tasks
       this.tasks = [];
       db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var task = doc.data();
@@ -141,6 +142,9 @@ export class ProjectDetailPage implements OnInit {
     this.router.navigate(["meetings-details", this.currentProject]);
   }
   goToMember(member){
-    this.router.navigate(["member-details",this.currentProject]);
+    var index = this.names.indexOf(member)
+
+    var user = [this.currentProject.id,this.team[index]]
+    this.router.navigate(["member-details",user]);
   }
 }

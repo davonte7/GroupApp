@@ -1,10 +1,46 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Member Name</ion-title>
-    <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    <ion-icon  id="back" slot="start" name="arrow-back" (click)="goBack()"></ion-icon>
+    <ion-title>
+      {{user.firstName}}  {{user.lastName}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div id="background">
+    <img src="assets/imgs/defaultUser.jpg">
+  </div>
 
+  <div id="profile">
+    <h1 >{{user.firstName}}    {{user.lastName}}
+    </h1>
+    <p id="bio">{{user.bio}}</p>
+  </div>
+
+  <div id="container">
+    <div id="contact">
+      <h4>Email</h4>
+      <p >{{user.email}}</p>
+
+      <h4>Phone</h4>
+      <p >{{user.phone}}</p>
+    </div>
+    <div id="projectNum">
+      <h4>Number of Projects</h4>
+      <div id="active">
+        <h6>Active</h6>
+        <p>0</p>
+      </div>
+      <div id="complete"> 
+        <h6>Completed</h6>
+        <p>0</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="company">
+    <h4>Company</h4>
+    <p >{{user.company}}</p>
+  </div>
 </ion-content>
