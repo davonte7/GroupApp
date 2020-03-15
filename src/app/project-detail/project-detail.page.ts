@@ -15,7 +15,9 @@ export class ProjectDetailPage implements OnInit {
    public team ;
    public names;
    public owner: any;
-   public meetings: [];
+   public meetings;
+   public tasks;
+   public dueDate
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -25,18 +27,75 @@ export class ProjectDetailPage implements OnInit {
   }
   
   ngOnInit() {
+    var db = firebase.firestore();
+    var self = this;
     console.log("Loading Clicked Project")
     this.route.params.subscribe(
         param => {
+          //Get Team Member Names
           this.names = [];
           this.team = [];
           this.currentProject = param;
           console.log(param);
           this.team = this.currentProject.team.split(',');
           this.getNames();
+
+          //Get Owner
+          this.getOwner(this.currentProject.owner)
+
+          //Get Meeting Time and Dates
+          this.meetings = [];
+          db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+            var detail = doc.data();
+            var time = self.formatDate(detail.time);
+            var meeting = String(detail.location + " on " + time);
+            self.meetings.push(meeting);
+            console.log("Meetings Retrieved")
+        })
+      });
+      this.tasks = [];
+      db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var task = doc.data();
+
+        self.tasks.push(task.title);
+        console.log("Tasks Retrieved")
+    })
+  });
+
+        var date = this.currentProject.dueDate.split("-")
+        self.dueDate = date[1] + "/" + date[2] + "/" + date[0];
+
         }
     )
   } // End of Init
+
+
+  formatDate(date){
+    var newDate = date.split("T")
+    //Format Date
+    var day = newDate[0].split("-");
+    day = day[1] + "/" + day[2] + "/" + day[0];
+
+    //Format Time
+    var time = newDate[1].split(":");
+    time = time[0] + ":" + time[1];
+    var finalDate = day + " at " + time;
+    return finalDate;
+  }
+
+  getOwner(id){
+    var db = firebase.firestore();
+    var self = this;
+
+      db.collection("users").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var user = doc.data();
+      var name = String(user.firstName + " " + user.lastName);
+      console.log("Name Retrieved")
+      self.owner = name;
+  })
+})
+
+  }
 
   getNames(){
     var db = firebase.firestore();

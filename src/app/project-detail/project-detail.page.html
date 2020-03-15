@@ -17,7 +17,7 @@
     <h6>
       <span class="label">Project Owner:</span> {{owner}}
       <br>
-      <span class="label">Due Date:</span> {{currentProject.dueDate}}
+      <span class="label">Due Date:</span> {{dueDate}}
     </h6>
   </div>
 
@@ -38,11 +38,8 @@
         <ion-icon size="small" name="pencil-sharp" (click)="goToTasks()"></ion-icon>
       </ion-label>
       <ion-list>
-        <ion-item>
-          Task 1
-        </ion-item>
-        <ion-item>
-          Task 2
+        <ion-item *ngFor="let task of tasks">
+          {{task}}
         </ion-item>
       </ion-list>
     </div>
@@ -52,11 +49,8 @@
         <ion-icon size="small" name="pencil-sharp" (click)="goToMeetings()"></ion-icon>
       </ion-label>
       <ion-list>
-        <ion-item >
-          Meeting Closest
-        </ion-item>
-        <ion-item>
-          Meeting Furthest
+        <ion-item *ngFor="let meeting of meetings" >
+          {{meeting}}
         </ion-item>
       </ion-list>
     </div>
