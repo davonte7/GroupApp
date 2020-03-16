@@ -6,20 +6,33 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-label>
+  <ion-list lines = "none" id="activeTask">
+    <ion-label class= "title">
       In-Progress
     </ion-label>
-    <ion-item *ngFor="let task of tasks">
-      {{task}}
+    <ion-item id="task" *ngFor="let task of tasks">
+      <ion-icon color="success" size="small" slot="start" name="checkmark"></ion-icon>
+      <p>
+
+      {{task.title}}  {{task.percent}}%
+     
+      <br> {{task.description}}
+      <br> Assigned To:<br>
+      <span *ngFor="let email of task.team">  ~ {{email}} <br></span>
+
+      </p>
+      <ion-icon color="danger" size="small" slot="end" name="trash"></ion-icon>
     </ion-item>
   </ion-list>
-  <ion-list>
-    <ion-label>
-      Completed
+  <ion-list lines = "none" id="activeTask">
+    <ion-label class ="title">
+      Complete
     </ion-label>
     <ion-item *ngFor="let task of tasks">
-      {{task}}
+      <p>
+      {{task.title}}  
+      <br> {{task.description}}
+    </p>
     </ion-item>
   </ion-list>
 </ion-content>

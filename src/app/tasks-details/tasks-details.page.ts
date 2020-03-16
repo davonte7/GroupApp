@@ -11,7 +11,15 @@ import * as firebase from 'firebase';
 export class TasksDetailsPage implements OnInit {
 
   currentProject:any
-  public tasks;
+    public title;
+    public description;
+    public team;
+    public percent;
+    public tasks = [{title:this.title,
+      description:this.description,
+      team:this.team,
+      percent:this.percent
+    }]
   constructor(    private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router) { }
@@ -24,12 +32,15 @@ export class TasksDetailsPage implements OnInit {
         param => {
           this.currentProject = param;
           console.log(param);
-
           this.tasks = [];
           db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
-            var task = doc.data();
-    
-            self.tasks.push(task.title);
+            var taskRef = doc.data();
+            var title = taskRef.title
+            var description = taskRef.description
+            var team = taskRef.emails
+            var percent = taskRef.percentage
+            var task = {title, description, team,percent}
+            self.tasks.push(task);
             console.log("Tasks Retrieved")
         })
       });
