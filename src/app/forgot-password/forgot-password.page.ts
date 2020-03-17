@@ -35,6 +35,7 @@ export class ForgotPasswordPage implements OnInit {
     console.log("Sending Reset link for");
     console.log(this.user.email);
 
+    //Get User
     var auth = firebase.auth();
     var emailAddress = this.user.email;
 

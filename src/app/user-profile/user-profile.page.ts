@@ -23,12 +23,14 @@ export class UserProfilePage implements OnInit {
   ) { 
     var db = firebase.firestore();
     var self = this;
+    //Get User
   db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
     console.log("User Profile Loading...........");
     self.users= [];
     querySnapshot.forEach(function(doc) {
     var user = doc.data();
     
+    //Push to users
     self.users.push({firstName:user.firstName, 
       lastName:user.lastName,
       company:user.company,

@@ -34,6 +34,7 @@ export class MemberDetailsPage implements OnInit {
   getUser(){
     var db = firebase.firestore();
     var self = this;
+    //Get User
     db.collection("users").where("id","==",this.currentMember).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
       self.user = doc.data();
 

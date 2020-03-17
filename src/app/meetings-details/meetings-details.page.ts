@@ -20,6 +20,8 @@ export class MeetingsDetailsPage implements OnInit {
     var db = firebase.firestore();
     var self = this;
     console.log("Loading Project")
+
+    //Get Meeting Details
     this.route.params.subscribe(
         param => {
           this.currentProject = param;

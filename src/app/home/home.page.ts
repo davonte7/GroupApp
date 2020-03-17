@@ -25,6 +25,7 @@ export class HomePage {
 
 ngOnInit(){
   var self = this;
+  //Get Current Project
   console.log("Current User: " + firebase.auth().currentUser.email)
   this.route.params.subscribe(param => { 
     console.log("Reseting Projects");
@@ -33,7 +34,7 @@ ngOnInit(){
     var user = firebase.auth().currentUser;
     this.projects = [];
 
-//////
+// Get Projects Containing User
 db.collection("projects").where("team", "array-contains",user.uid).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
   console.log("Projects for " + user.email + " Loading......");
   var projectI = doc.data();

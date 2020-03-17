@@ -33,6 +33,8 @@ export class TasksDetailsPage implements OnInit {
           this.currentProject = param;
           console.log(param);
           this.tasks = [];
+
+          //Get Tasks
           db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
             var taskRef = doc.data();
             var title = taskRef.title

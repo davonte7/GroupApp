@@ -54,6 +54,7 @@ export class LoginPage implements OnInit {
 		var errorMessage = error.message;
 		console.log(errorCode);
     
+    //If wrong password
 		if (errorCode === 'auth/wrong-password') {
             alert('Wrong password.');
             noErr = false;
@@ -81,6 +82,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(["/forgot-password"])
   }
 
+  //Google Login
   loginGoogle(){
     var self=this;
     console.log("Logging in with Google...")

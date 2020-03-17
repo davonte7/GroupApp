@@ -38,14 +38,17 @@ export class SignupPage implements OnInit {
       console.log("Creating User for")
       console.log(this.user.email)
 
+      //Initialize variables
       var email=this.user.email;
       var password=this.user.password;
       var firstName = this.user.firstName;
       var lastName = this.user.lastName;
       var self=this;
   
+      //Create User
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(
         function(error) {
+          
       // Handle Errors here.
       console.log(error);
       var errorCode = error.code;

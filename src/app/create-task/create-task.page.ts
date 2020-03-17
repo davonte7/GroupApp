@@ -34,10 +34,14 @@ export class CreateTaskPage implements OnInit {
 
   createTask(){
     console.log("Creating Task For: ");
+
+    //initialize variables
     var title = this.task.title;
     var description = this.task.description;
     var emails = this.task.emails.split(" ");
     var percent = this.task.percent;
+
+    // create task
     this.taskService.createTask(title,description,emails,percent, this.currentProject.id);
     this.goBack();
   }

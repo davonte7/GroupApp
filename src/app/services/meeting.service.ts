@@ -20,6 +20,7 @@ export class MeetingService {
     var self=this;
     var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
     var db = firebase.firestore();
+    //Add To Meeting
           db.collection("meetings").add({
             'id':id,
             'time': date,
@@ -29,7 +30,7 @@ export class MeetingService {
       .then(function(docRef) {
           console.log("Document written with ID: ", docRef.id);
           
-          //update this products arrays
+          //update meetings
       })
       .catch(function(error) {
           console.error("Error adding document: ", error);

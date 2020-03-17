@@ -69,6 +69,7 @@ export class EditUserPage implements OnInit {
     var docId;
     var newValues;
 
+    //Get User information
     db.collection("users").where("id","==",firebase.auth().currentUser.uid).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
 
       docId = doc.id;
@@ -82,6 +83,7 @@ export class EditUserPage implements OnInit {
         company: value.company,
         URL: value.URL
       }
+      //Update Values
       self.userService.updateUser(newValues);
     })
   });

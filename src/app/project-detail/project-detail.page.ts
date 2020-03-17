@@ -55,9 +55,11 @@ export class ProjectDetailPage implements OnInit {
       });
         //Get Tasks
       this.tasks = [];
+      //Find Tasl
       db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var task = doc.data();
 
+        //Push to Arrays
         self.tasks.push(task.title);
         console.log("Tasks Retrieved")
     })

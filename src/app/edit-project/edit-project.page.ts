@@ -50,13 +50,14 @@ export class EditProjectPage implements OnInit {
   }
  
   updateProject(value){
+    //Updated Values
     var db = firebase.firestore();
     var self = this;
     var newValues;
     var projectId;
     var id = this.currentProject.id;
 
-
+    //Update project
     db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
 
       projectId = doc.id;

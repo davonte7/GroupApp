@@ -80,6 +80,7 @@ export class ProjectService {
  
    console.log(newValues.id);
   var db = firebase.firestore()
+  //Get Project
   var projectRef = db.collection("projects").doc(newValues.id);
  
   // Update Values
@@ -104,7 +105,7 @@ export class ProjectService {
       console.log(id);
       var db = firebase.firestore();
 
-
+      //Get Project 
       db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var projectId = doc.id;
         var projectRef = db.collection("projects").doc(projectId);
@@ -133,6 +134,7 @@ export class ProjectService {
       var db = firebase.firestore();
 
 
+      //Get Project
       db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var projectId = doc.id;
         var projectRef = db.collection("projects").doc(projectId);
@@ -156,6 +158,8 @@ export class ProjectService {
       console.log(id);
       var db = firebase.firestore();
       var member;
+      
+      //Get Project
       db.collection("users").where("email","==",email).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var user = doc.data();
         id = doc.id

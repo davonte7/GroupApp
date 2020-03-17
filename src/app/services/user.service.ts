@@ -133,8 +133,10 @@ updateUser(newValues){
       var user = doc.data();
       docID = doc.id;
       number = user.numOfProjects -1;
+      //Access User
       var userRef = db.collection("users").doc(docID);
 
+      //Update User
       userRef.update({
         numOfProjects:number
     })

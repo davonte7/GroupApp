@@ -19,6 +19,7 @@ export class TaskService {
   createTask(title,description,emails,percentage,projectId){
     var self=this;
     var id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15); 
+    //Add Task
     var db = firebase.firestore();
           db.collection("tasks").add({
             'id':id,
