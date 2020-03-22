@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import * as firebase from 'firebase';
+import { MeetingService } from '../services/meeting.service';
 
 @Component({
   selector: 'app-meetings-details',
@@ -14,6 +15,7 @@ export class MeetingsDetailsPage implements OnInit {
   public meetings;
   constructor(    private route: ActivatedRoute,
     private projectService: ProjectService,
+    private meetingService: MeetingService,
     private router: Router) { }
 
   ngOnInit() {
@@ -31,8 +33,9 @@ export class MeetingsDetailsPage implements OnInit {
           db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
             var detail = doc.data();
             var time = self.formatDate(detail.time);
-            var meeting = String(detail.location + " on " + time);
-            self.meetings.push(meeting);
+            var place = String(detail.location + " on " + time);
+            var id = detail.id
+            self.meetings.push({place,id});
             console.log("Meetings Retrieved")
         })
       });
@@ -51,6 +54,15 @@ export class MeetingsDetailsPage implements OnInit {
     time = time[0] + ":" + time[1];
     var finalDate = day + " at " + time;
     return finalDate;
+  }
+
+  deleteMeeting(meeting){
+    var id = meeting.id
+    var projectId = this.currentProject.id
+    console.log("Deleting Meeting: " + id)
+    this.meetingService.deleteMeeting(id,projectId)
+    alert("Meeting Deleted")
+    this.goBack()
   }
 
   goBack(){

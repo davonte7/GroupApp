@@ -10,7 +10,7 @@
     <ion-label class= "title">
       In-Progress
     </ion-label>
-    <ion-item id="task" *ngFor="let task of tasks">
+    <ion-item id="task" *ngFor="let task of tasks" (click)="deleteTask(task)">
       <ion-icon color="success" size="small" slot="start" name="checkmark"></ion-icon>
       <p>
 

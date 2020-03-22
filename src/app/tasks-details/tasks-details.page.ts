@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import * as firebase from 'firebase';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-tasks-details',
@@ -15,13 +16,16 @@ export class TasksDetailsPage implements OnInit {
     public description;
     public team;
     public percent;
+    public id;
     public tasks = [{title:this.title,
       description:this.description,
       team:this.team,
-      percent:this.percent
+      percent:this.percent,
+      id: this.id
     }]
   constructor(    private route: ActivatedRoute,
     private projectService: ProjectService,
+    private taskService: TaskService,
     private router: Router) { }
 
   ngOnInit() {
@@ -41,13 +45,23 @@ export class TasksDetailsPage implements OnInit {
             var description = taskRef.description
             var team = taskRef.emails
             var percent = taskRef.percentage
-            var task = {title, description, team,percent}
+            var id = taskRef.id
+            var task = {title, description, team,percent,id}
             self.tasks.push(task);
             console.log("Tasks Retrieved")
         })
       });
         }
     )
+  }
+
+  deleteTask(task){
+    var id = task.id;
+    var projectId = this.currentProject.id
+    console.log("Deleting Task: " + id)
+    this.taskService.deleteTask(id,projectId)
+    alert("Task Deleted")
+    this.goBack()
   }
 
   goBack(){

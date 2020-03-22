@@ -187,4 +187,51 @@ export class ProjectService {
   });
   });
   }
+
+  removeTask(id,task){
+    console.log(id);
+    var db = firebase.firestore();
+    //Get Project
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var projectId = doc.id;
+      var projectRef = db.collection("projects").doc(projectId);
+
+      projectRef.update({
+        tasks: firebase.firestore.FieldValue.arrayRemove(task)
+      })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+    })
+  });
+  }
+
+  removeMeeting(id, meeting){
+    console.log(id);
+    var db = firebase.firestore();
+    //Get Project
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var projectId = doc.id;
+      var projectRef = db.collection("projects").doc(projectId);
+
+      projectRef.update({
+        meetings: firebase.firestore.FieldValue.arrayRemove(meeting)
+      })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
+
+    })
+  });
+  }
+
 }

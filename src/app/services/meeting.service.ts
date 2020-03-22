@@ -47,19 +47,32 @@ export class MeetingService {
       
 }
 
-deleteMeeting(id){
+deleteMeeting(id,projectId){
   var self=this;
   var db = firebase.firestore();
+  var meetingId;
 
-  //Delete Meeting
-  db.collection("meetings").doc(id).delete().then(function() {
+      db.collection("meetings").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var meeting = doc.data();
+        console.log(meeting)
+        meetingId = doc.id
+        this.projectService.removeMeeting(projectId,meeting);
+
+          //Delete Task
+  db.collection("meetings").doc(meetingId).delete().then(function() {
     console.log("Document successfully deleted!");
     console.log("Meeting deleted")
-    self.router.navigate(["project-detail"]);
   }).catch(function(error) {
       console.error("Error removing document: ", error);
     });
+
+      })
+    });
+
+
 }
+
+
 
 updateMeeting(newValues){
   console.log(newValues.id);

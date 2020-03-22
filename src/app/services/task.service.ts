@@ -48,18 +48,29 @@ export class TaskService {
     });
 }
 
-deleteTask(id){
+deleteTask(id,projectId){
   var self=this;
   var db = firebase.firestore();
+  var taskId;
 
-  //Delete Task
-  db.collection("tasks").doc(id).delete().then(function() {
+      db.collection("tasks").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+        var task = doc.data();
+        console.log(task)
+         taskId = doc.id
+        this.projectService.removeTask(projectId,task);
+
+          //Delete Task
+  db.collection("tasks").doc(taskId).delete().then(function() {
     console.log("Document successfully deleted!");
     console.log("Task deleted")
-    self.router.navigate(["project-detail"]);
   }).catch(function(error) {
       console.error("Error removing document: ", error);
     });
+
+      })
+    });
+
+
 }
 
 updateTask(newValues){
