@@ -68,6 +68,10 @@ const routes: Routes = [
     path: 'member-details',
     loadChildren: () => import('./member-details/member-details.module').then( m => m.MemberDetailsPageModule)
   },
+  {
+    path: 'messages',
+    loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
+  },
 ];
 
 @NgModule({

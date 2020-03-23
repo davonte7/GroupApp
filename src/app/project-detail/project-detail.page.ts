@@ -144,4 +144,8 @@ export class ProjectDetailPage implements OnInit {
     var user = [this.currentProject.id,this.team[index]]
     this.router.navigate(["member-details",user]);
   }
+
+  goToMessages(){
+    this.router.navigate(["messages", this.currentProject])
+  }
 }
