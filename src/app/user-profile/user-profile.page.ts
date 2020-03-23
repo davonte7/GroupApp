@@ -12,37 +12,35 @@ import * as firebase from 'firebase';
 })
 export class UserProfilePage implements OnInit {
 
-  users = [
-
-  ];
+  users = [];
   
-
   constructor(
     private router: Router,
     public userService: UserService,
-  ) { 
+  ) 
+  { 
     var db = firebase.firestore();
     var self = this;
     //Get User
-  db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
-    console.log("User Profile Loading...........");
-    self.users= [];
-    querySnapshot.forEach(function(doc) {
-    var user = doc.data();
+    db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
+      console.log("User Profile Loading...........");
+      self.users= [];
+      querySnapshot.forEach(function(doc) {
+        var user = doc.data();
     
-    //Push to users
-    self.users.push({firstName:user.firstName, 
-      lastName:user.lastName,
-      company:user.company,
-      bio:user.bio,
-      email:user.email,
-      phone:user.phone,
-      profilePic: user.profilePicUrl
-    })
-    console.log(self.users);
-  });
-    console.log("User Loaded");
-} )
+      //Push to users
+      self.users.push({firstName:user.firstName, 
+        lastName:user.lastName,
+        company:user.company,
+        bio:user.bio,
+        email:user.email,
+        phone:user.phone,
+        profilePic: user.profilePicUrl
+      })
+      console.log(self.users);
+      });
+      console.log("User Loaded");
+    } )
   }
 
 

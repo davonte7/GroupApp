@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { Router,Routes, RouterModule } from '@angular/router';
-
-import { IonicModule } from '@ionic/angular';
+import { Router} from '@angular/router';
 
 import * as firebase from 'firebase';
+
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -26,7 +21,7 @@ export class EditUserPage implements OnInit {
     
  	     ) { 
           //Creates Form to update User
-        this.edit_user_form = this.formBuilder.group({
+          this.edit_user_form = this.formBuilder.group({
           firstName: new FormControl("", Validators.required),
           lastName: new FormControl("", Validators.required),
           bio: new FormControl("", Validators.required),
@@ -83,7 +78,7 @@ export class EditUserPage implements OnInit {
         company: value.company,
         URL: value.URL
       }
-      //Update Values
+      //Update Values in User Service
       self.userService.updateUser(newValues);
     })
   });

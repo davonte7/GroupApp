@@ -18,9 +18,10 @@ export class MemberDetailsPage implements OnInit {
     private projectService: ProjectService,
     private router: Router) { }
 
-   ngOnInit() {
-    console.log("Loading Project")
+  ngOnInit() {
+   console.log("Loading Project")
    this.route.params.subscribe(
+        //Get Current Project and Current Member
         param => {
           this.currentProject = param[0];
           this.currentMember = param[1];
@@ -38,8 +39,8 @@ export class MemberDetailsPage implements OnInit {
     db.collection("users").where("id","==",this.currentMember).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
       self.user = doc.data();
 
-  })
-});
+    })
+    });
   }
 
   goBack(){
@@ -50,8 +51,8 @@ export class MemberDetailsPage implements OnInit {
       project = doc.data();
 
       self.router.navigate(["project-detail",project])
-  })
-});
+    })
+    });
   
   }
 

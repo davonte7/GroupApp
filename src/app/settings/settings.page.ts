@@ -17,16 +17,15 @@ export class SettingsPage implements OnInit {
   }
 
   logout(){
-    var self=this;
     console.log("Loggging User out...")
     firebase.auth().signOut().then(function() {
     }).catch(function(error) {
-// An error happened.
-});
-  // Sign-out successful.
-console.log("Logout Successful")
-  this.router.navigate(["/login"])
-}
+      // An error happened.
+    });
+    // Sign-out successful.
+    console.log("Logout Successful")
+    this.router.navigate(["/login"])
+  }
  
   goBack(){
     this.router.navigate(["/home"])

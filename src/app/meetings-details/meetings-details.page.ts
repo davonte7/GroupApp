@@ -26,10 +26,13 @@ export class MeetingsDetailsPage implements OnInit {
     //Get Meeting Details
     this.route.params.subscribe(
         param => {
+          //Get Current Project
           this.currentProject = param;
           console.log(param);
 
           this.meetings = [];
+
+          //Get Meetings for Current Project
           db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
             var detail = doc.data();
             var time = self.formatDate(detail.time);
@@ -37,11 +40,10 @@ export class MeetingsDetailsPage implements OnInit {
             var id = detail.id
             self.meetings.push({place,id});
             console.log("Meetings Retrieved")
+          })
+          });
         })
-      });
-        }
-    )
-  }
+    }
 
   formatDate(date){
     var newDate = date.split("T")
@@ -60,6 +62,8 @@ export class MeetingsDetailsPage implements OnInit {
     var id = meeting.id
     var projectId = this.currentProject.id
     console.log("Deleting Meeting: " + id)
+    
+    //Delete Meeting in Meeting Service
     this.meetingService.deleteMeeting(id,projectId)
     alert("Meeting Deleted")
     this.goBack()

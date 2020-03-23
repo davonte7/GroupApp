@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Router,Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -34,43 +31,44 @@ export class SignupPage implements OnInit {
   ngOnInit() {
 
   }
-    signup(){
-      console.log("Creating User for")
-      console.log(this.user.email)
 
-      //Initialize variables
-      var email=this.user.email;
-      var password=this.user.password;
-      var firstName = this.user.firstName;
-      var lastName = this.user.lastName;
-      var self=this;
+  signup(){
+    console.log("Creating User for")
+    console.log(this.user.email)
+
+    //Initialize variables
+    var email=this.user.email;
+    var password=this.user.password;
+    var firstName = this.user.firstName;
+    var lastName = this.user.lastName;
+    var self=this;
   
-      //Create User
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(
-        function(error) {
+    //Create User
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(
+      function(error) {
           
-      // Handle Errors here.
-      console.log(error);
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(error.message);
-      if(errorCode.length > 0){
-        console.log("Failed");
-        alert("Signup Failed: " + errorMessage);
-        self.router.navigate(["/login"])
-      }
-      else{
-        console.log("Signup successful")
-      }
-      // ...
-    }).then(function(result){
-        self.userService.createUser(email,firstName,lastName)
+        // Handle Errors here.
+        console.log(error);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(error.message);
+        if(errorCode.length > 0){
+          console.log("Failed");
+          alert("Signup Failed: " + errorMessage);
+          self.router.navigate(["/login"])
+        }
 
-          console.log("Finished Creating Account for")
-          console.log(email)
-          self.router.navigate(["/login"]);   
-    });
-    }
+        else{
+          console.log("Signup successful")
+        }
+    }).then(function(){
+        //Create User in User Service
+        self.userService.createUser(email,firstName,lastName)
+        console.log("Finished Creating Account for")
+        console.log(email)
+        self.router.navigate(["/login"]);   
+      });
+  }
     goBack(){
       this.router.navigate(["login"]);
     }

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../services/project.service';
 import * as firebase from 'firebase';
  
 @Component({
@@ -18,13 +15,11 @@ export class ProjectDetailPage implements OnInit {
    public meetings;
    public tasks;
    public dueDate
+
   constructor(
     private route: ActivatedRoute,
-    private projectService: ProjectService,
     private router: Router
-  ) { 
-    
-  }
+  ) {}
   
   ngOnInit() {
     var db = firebase.firestore();
@@ -51,25 +46,23 @@ export class ProjectDetailPage implements OnInit {
             var meeting = String(detail.location + " on " + time);
             self.meetings.push(meeting);
             console.log("Meetings Retrieved")
-        })
-      });
-        //Get Tasks
-      this.tasks = [];
-      //Find Tasl
-      db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
-        var task = doc.data();
+          })
+          });
+          //Get Tasks
+          this.tasks = [];
+          //Find Task
+          db.collection("tasks").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+            var task = doc.data();
 
-        //Push to Arrays
-        self.tasks.push(task.title);
-        console.log("Tasks Retrieved")
+            //Push to Arrays
+            self.tasks.push(task.title);
+            console.log("Tasks Retrieved")
+          })
+          });
+          //Get and Format Date
+          var date = this.currentProject.dueDate.split("-")
+          self.dueDate = date[1] + "/" + date[2] + "/" + date[0];
     })
-  });
-
-        var date = this.currentProject.dueDate.split("-")
-        self.dueDate = date[1] + "/" + date[2] + "/" + date[0];
-
-        }
-    )
   } // End of Init
 
 
@@ -90,14 +83,13 @@ export class ProjectDetailPage implements OnInit {
     var db = firebase.firestore();
     var self = this;
 
-      db.collection("users").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+    db.collection("users").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
       var user = doc.data();
       var name = String(user.firstName + " " + user.lastName);
       console.log("Name Retrieved")
       self.owner = name;
-  })
-})
-
+    })
+    })
   }
 
   getNames(){
@@ -106,13 +98,13 @@ export class ProjectDetailPage implements OnInit {
 
     for(var i = 0; i < this.team.length; i++){
       db.collection("users").where("id","==",self.team[i]).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
-      var user = doc.data();
-      var name = String(user.firstName + " " + user.lastName);
-      self.names.push(name);
-      console.log("Name Retrieved")
-  })
-});
-}
+        var user = doc.data();
+        var name = String(user.firstName + " " + user.lastName);
+        self.names.push(name);
+        console.log("Name Retrieved")
+      })
+      });
+    }
 
   }
 
@@ -145,7 +137,8 @@ export class ProjectDetailPage implements OnInit {
   }
   goToMember(member){
     var index = this.names.indexOf(member)
-
+    
+    //Navigate to Member Details with User and Current Project
     var user = [this.currentProject.id,this.team[index]]
     this.router.navigate(["member-details",user]);
   }

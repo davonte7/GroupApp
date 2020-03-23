@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import * as firebase from 'firebase';
 
+//Firebase Info
 var firebaseConfig = {
   apiKey: "AIzaSyDVHOPU9DXnefz_Wk2ZvTvAwbHfoyL7f3o",
   authDomain: "group-project-app-19ef5.firebaseapp.com",

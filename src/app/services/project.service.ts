@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import {Subject} from 'rxjs';
@@ -52,53 +51,52 @@ export class ProjectService {
 }
 
     deleteProject(id){
-      var self=this;
       var db = firebase.firestore();
       var projectId;
       console.log(id);
 
       //Get Project
-    db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-      projectId = doc.id; 
-      console.log(projectId);
+      db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+        projectId = doc.id; 
+        console.log(projectId);
 
-      //Delete Project
-      db.collection("projects").doc(projectId).delete().then(function() {
-        console.log("Document successfully deleted");
-        console.log("Project deleted");
-      }).catch(function(error) {
-          console.error("Error removing document: ", error);
-        });
+        //Delete Project
+        db.collection("projects").doc(projectId).delete().then(function() {
+          console.log("Document successfully deleted");
+          console.log("Project deleted");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+          });
 
-      })
-    } )
+        })
+      } )
         
-}
+  }
 
-    updateProject(newValues){
+  updateProject(newValues){
  
    console.log(newValues.id);
-  var db = firebase.firestore()
-  //Get Project
-  var projectRef = db.collection("projects").doc(newValues.id);
- 
-  // Update Values
-   projectRef.update({
-    name: newValues.name,
-    description: newValues.description,
-    dueDate: newValues.dueDate,
-    complete: newValues.complete,
-  })
-  .then(function() {
-      console.log("Document successfully updated!");
-  })
-  .catch(function(error) {
-      // The document probably doesn't exist.
-      console.error("Error updating document: ", error);
-  });
+    var db = firebase.firestore()
+    //Get Project
+    var projectRef = db.collection("projects").doc(newValues.id);
+  
+    // Update Values
+    projectRef.update({
+      name: newValues.name,
+      description: newValues.description,
+      dueDate: newValues.dueDate,
+      complete: newValues.complete,
+    })
+    .then(function() {
+        console.log("Document successfully updated!");
+    })
+    .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
 
-}
+  }
 
     addMeeting(id,meeting){
 
@@ -109,7 +107,8 @@ export class ProjectService {
       db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var projectId = doc.id;
         var projectRef = db.collection("projects").doc(projectId);
-  
+        
+        //Update Meeting Array in Project
         projectRef.update({
           meetings: firebase.firestore.FieldValue.arrayUnion(meeting)
         })
@@ -126,32 +125,30 @@ export class ProjectService {
 
     }
 
-    
-
     addTask(id, task){
 
       console.log(id);
       var db = firebase.firestore();
 
-
       //Get Project
       db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var projectId = doc.id;
         var projectRef = db.collection("projects").doc(projectId);
-  
+        
+        //Update Task Array For Project
         projectRef.update({
           tasks: firebase.firestore.FieldValue.arrayUnion(task)
         })
-      .then(function() {
+        .then(function() {
           console.log("Document successfully updated!");
-      })
-      .catch(function(error) {
+        })
+        .catch(function(error) {
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
-      });
+        });
   
       })
-    });
+      });
     }
 
     addMember(id, email, projectId){
@@ -159,56 +156,59 @@ export class ProjectService {
       var db = firebase.firestore();
       var member;
       
-      //Get Project
+      //Get User
       db.collection("users").where("email","==",email).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
         var user = doc.data();
         id = doc.id
         member = user.id;
-  
+        
+        //Get Project
         db.collection("projects").where("id","==",projectId).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
           var projectId = doc.id;
           var projectRef = db.collection("projects").doc(projectId);
-    
+          
+          //Update Team Array For Project
           projectRef.update({
             team: firebase.firestore.FieldValue.arrayUnion(member)
           })
-      .then(function() {
-          console.log("Document successfully updated!");
-      })
-      .catch(function(error) {
-          // The document probably doesn't exist.
-          console.error("Error updating document: ", error);
-      });
+          .then(function() {
+            console.log("Document successfully updated!");
+          })
+          .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+          });
 
-    });
-
+          });
      
-    });
-  });
-  });
+          });
+      });
+      });
   }
 
   removeTask(id,task){
     console.log(id);
     var db = firebase.firestore();
+    
     //Get Project
     db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
       var projectId = doc.id;
       var projectRef = db.collection("projects").doc(projectId);
 
+      //Remove Task From Array in Project
       projectRef.update({
         tasks: firebase.firestore.FieldValue.arrayRemove(task)
       })
-    .then(function() {
+      .then(function() {
         console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
+      })
+      .catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
-    });
+      });
 
     })
-  });
+    });
   }
 
   removeMeeting(id, meeting){
@@ -219,19 +219,20 @@ export class ProjectService {
       var projectId = doc.id;
       var projectRef = db.collection("projects").doc(projectId);
 
+      //Remove Meeting From Array in Project
       projectRef.update({
         meetings: firebase.firestore.FieldValue.arrayRemove(meeting)
       })
-    .then(function() {
+      .then(function() {
         console.log("Document successfully updated!");
-    })
-    .catch(function(error) {
+      })
+      .catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
-    });
+      });
 
     })
-  });
+    });
   }
 
 }

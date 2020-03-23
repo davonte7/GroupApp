@@ -34,6 +34,8 @@ export class EditProjectPage implements OnInit {
   ngOnInit() {
     var self = this;
     console.log("Loading Project...");
+
+    //Get Current Project
     this.route.params.subscribe(
       param => {
         this.currentProject = param;
@@ -46,11 +48,11 @@ export class EditProjectPage implements OnInit {
             self.edit_project_form.patchValue({dueDate:this.currentProject.dueDate});
             self.edit_project_form.patchValue({complete:this.currentProject.complete});
 
-          console.log("Project Loaded")
+            console.log("Project Loaded")
   }
  
   updateProject(value){
-    //Updated Values
+    //value = Updated Values
     var db = firebase.firestore();
     var self = this;
     var newValues;
@@ -69,6 +71,7 @@ export class EditProjectPage implements OnInit {
         dueDate: value.dueDate,
         complete: value.complete,
       }
+      //Update project in project service
       self.projectService.updateProject(newValues);
     })
   });
@@ -79,11 +82,15 @@ export class EditProjectPage implements OnInit {
   deleteProject(){
     console.log("Deleting project: " + this.currentProject.name);
 
-    //Delete Project
+    //Delete Project in project service
     this.projectService.deleteProject(this.currentProject.id);
+
+    //Decrement Project Count in User Service
     this.userService.minusProject(firebase.auth().currentUser.uid);
+
     this.router.navigate(["home"]);
   }
+
   goBack(){
     this.router.navigate(["project-detail",this.currentProject])
   }

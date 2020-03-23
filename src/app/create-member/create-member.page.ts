@@ -21,6 +21,7 @@ export class CreateMemberPage implements OnInit {
     private router: Router) { }
 
     ngOnInit() {
+      //Get Current Project
       this.route.params.subscribe(
           param => {
             this.currentProject = param;
@@ -31,6 +32,8 @@ export class CreateMemberPage implements OnInit {
   addMember(){
     var email = this.member.email;
     var projectId = this.currentProject.id;
+
+    //Call Add Member in Project Service
     this.projectService.addMember(projectId,email,this.currentProject.id)
     this.goBack();
   }

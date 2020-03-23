@@ -24,8 +24,10 @@ export class DeleteUserPage implements OnInit {
     var user = firebase.auth().currentUser;
     var self = this;
     //TODO: Add Check to see if ownerships have been transferred
-    //Delete User
+    
     console.log("Deleting account for: " +user.email);
+
+    //Delete User in User Service
     self.userService.deleteUser(user.uid);
 
     this.router.navigate(["/login"]);

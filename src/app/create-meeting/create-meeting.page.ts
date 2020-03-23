@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectService } from '../services/project.service';
 import { MeetingService } from '../services/meeting.service';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-create-meeting',
@@ -21,11 +19,11 @@ export class CreateMeetingPage implements OnInit {
   }
   constructor(    
     private route: ActivatedRoute,
-    private projectService: ProjectService,
     private meetingService: MeetingService,
     private router: Router) { }
  
     ngOnInit() {
+      //Get Current Project
       this.route.params.subscribe(
           param => {
             this.currentProject = param;
@@ -37,11 +35,12 @@ export class CreateMeetingPage implements OnInit {
 
         console.log("Creating Meeting For Project")
         console.log(this.currentProject.name)
-        var db = firebase.firestore();
         var date=this.meeting.date;
         var location=this.meeting.location;
         var self=this;
         var projectId = this.currentProject.id
+
+        //Call Create Meeting in Meeting Service
         self.meetingService.createMeeting(date,location,projectId);
 
         self.goBack()

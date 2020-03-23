@@ -25,6 +25,7 @@ export class CreateTaskPage implements OnInit {
     private router: Router) { }
 
     ngOnInit() {
+      //Get Current Project
       this.route.params.subscribe(
           param => {
             this.currentProject = param;
@@ -41,7 +42,7 @@ export class CreateTaskPage implements OnInit {
     var emails = this.task.emails.split(" ");
     var percent = this.task.percent;
 
-    // create task
+    // create task in task service
     this.taskService.createTask(title,description,emails,percent, this.currentProject.id);
     this.goBack();
   }
