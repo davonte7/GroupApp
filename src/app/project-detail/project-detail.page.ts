@@ -34,10 +34,10 @@ export class ProjectDetailPage implements OnInit {
           console.log(param);
           this.team = this.currentProject.team.split(',');
           this.getNames();
-
+          console.log("Names Retrieved")
           //Get Owner
           this.getOwner(this.currentProject.owner)
-
+          console.log("Owner Retrieved")
           //Get Meeting Time and Dates
           this.meetings = [];
           db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
@@ -56,12 +56,16 @@ export class ProjectDetailPage implements OnInit {
 
             //Push to Arrays
             self.tasks.push(task.title);
-            console.log("Tasks Retrieved")
           })
           });
-          //Get and Format Date
-          var date = this.currentProject.dueDate.split("-")
-          self.dueDate = date[1] + "/" + date[2] + "/" + date[0];
+          console.log("Tasks Retrieved")
+          //Get Date
+          var date = this.currentProject.dueDate
+          var newDate = date.split("T")
+          //Format Date
+          var day = newDate[0].split("-");
+          day = day[1] + "/" + day[2] + "/" + day[0];
+          self.dueDate = day;
     })
   } // End of Init
 
@@ -86,7 +90,6 @@ export class ProjectDetailPage implements OnInit {
     db.collection("users").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
       var user = doc.data();
       var name = String(user.firstName + " " + user.lastName);
-      console.log("Name Retrieved")
       self.owner = name;
     })
     })
@@ -101,7 +104,6 @@ export class ProjectDetailPage implements OnInit {
         var user = doc.data();
         var name = String(user.firstName + " " + user.lastName);
         self.names.push(name);
-        console.log("Name Retrieved")
       })
       });
     }
