@@ -59,6 +59,22 @@ export class ProjectService {
       db.collection("projects").where("id", "==",id).onSnapshot(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
         projectId = doc.id; 
+
+        //Delete Task Related to Project
+        db.collection("tasks").where("projectId","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+          var taskRef = doc.id;
+          db.collection("tasks").doc(taskRef).delete()
+        })
+        });
+
+        //Delete Meetings Related to Project
+        db.collection("meetings").where("projectId","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+          var meetingRef = doc.id;
+          db.collection("meetings").doc(meetingRef).delete()
+        })
+        });  
+
+
         console.log(projectId);
 
         //Delete Project
