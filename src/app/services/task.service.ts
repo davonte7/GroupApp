@@ -68,6 +68,68 @@ export class TaskService {
     });
   }
 
+  completeTask(id,projectId){
+    var db = firebase.firestore();
+    var taskId;
+    db.collection("tasks").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      taskId = doc.id
+      var oldTask = doc.data()
+
+      //Remove the Incomplete Task from project
+      this.projectService.removeTask(projectId,oldTask)
+
+      //Update Tasks
+      var taskRef =db.collection("tasks").doc(taskId)
+      taskRef.update({complete: true})
+      
+      //Add Completed Task
+      var newTask = {
+        'id':oldTask.id,
+        'title': oldTask.title,
+        'description':oldTask.description,
+        'emails':oldTask.emails,
+        'percentage': oldTask.percentage,
+        'projectId':oldTask.projectId,
+        'complete': true
+      }
+      this.projectService.addTask(projectId,newTask)
+      this.projectService.completeTask(projectId,newTask.percentage)
+    })
+    })
+
+  }
+
+  incompleteTask(id,projectId){
+    var db = firebase.firestore();
+    var taskId;
+    db.collection("tasks").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      taskId = doc.id
+      var oldTask = doc.data()
+
+      //Remove the Complete Task from project
+      this.projectService.removeTask(projectId,oldTask)
+
+      //Update Tasks
+      var taskRef =db.collection("tasks").doc(taskId)
+      taskRef.update({complete: false})
+      
+      //Add InCompleted Task
+      var newTask = {
+        'id':oldTask.id,
+        'title': oldTask.title,
+        'description':oldTask.description,
+        'emails':oldTask.emails,
+        'percentage': oldTask.percentage,
+        'projectId':oldTask.projectId,
+        'complete': false
+      }
+      this.projectService.addTask(projectId,newTask)
+      this.projectService.incompleteTask(projectId,newTask.percentage)
+    })
+    })
+
+  }
+
   updateTask(newValues){
     console.log(newValues.id);
 

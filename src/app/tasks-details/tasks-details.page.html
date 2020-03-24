@@ -10,8 +10,9 @@
     <ion-label class= "title">
       In-Progress
     </ion-label>
-    <ion-item id="task" *ngFor="let task of tasks" (click)="deleteTask(task)">
-      <ion-icon color="success" size="small" slot="start" name="checkmark"></ion-icon>
+    <ng-container *ngFor="let task of tasks">
+    <ion-item id="task"  *ngIf="task.complete == false" >
+      <ion-icon color="danger" size="small" slot="start" name="square-outline" (click)="completeTask(task)"></ion-icon>
       <p>
 
       {{task.title}}  {{task.percent}}%
@@ -21,18 +22,27 @@
       <span *ngFor="let email of task.team">  ~ {{email}} <br></span>
 
       </p>
-      <ion-icon color="danger" size="small" slot="end" name="trash"></ion-icon>
+      <ion-icon color="danger" size="small" slot="end" name="trash" (click)="deleteTask(task)"></ion-icon>
     </ion-item>
+  </ng-container>
   </ion-list>
   <ion-list lines = "none" id="activeTask">
     <ion-label class ="title">
       Complete
     </ion-label>
-    <ion-item *ngFor="let task of tasks">
+    <ng-container *ngFor="let task of tasks">
+    <ion-item *ngIf="task.complete == true">
+      <ion-icon color="success" size="small" slot="start" name="checkbox" (click)="incompleteTask(task)"></ion-icon>
       <p>
-      {{task.title}}  
+
+      {{task.title}}  {{task.percent}}%
+     
       <br> {{task.description}}
-    </p>
+      <br> Assigned To:<br>
+      <span *ngFor="let email of task.team">  ~ {{email}} <br></span>
+
+      </p>
     </ion-item>
+  </ng-container>
   </ion-list>
 </ion-content>

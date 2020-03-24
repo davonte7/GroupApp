@@ -251,4 +251,57 @@ export class ProjectService {
     });
   }
 
+  completeTask(id,percent){
+    console.log(id);
+    var db = firebase.firestore();
+    
+    //Get Project
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var projectId = doc.id;
+      var project = doc.data();
+      var percentComplete = project.percentComplete
+      var projectRef = db.collection("projects").doc(projectId);
+
+      //Remove Add Percent from complete task
+      projectRef.update({
+        percentComplete: percentComplete + percent 
+      })
+      .then(function() {
+        console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+
+    })
+    });
+  }
+
+  incompleteTask(id,percent){
+    console.log(id);
+    var db = firebase.firestore();
+    
+    //Get Project
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var projectId = doc.id;
+      var project = doc.data();
+      var percentComplete = project.percentComplete
+      var projectRef = db.collection("projects").doc(projectId);
+
+      //Remove Add Percent from complete task
+      projectRef.update({
+        percentComplete: percentComplete - percent 
+      })
+      .then(function() {
+        console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+
+    })
+    });
+  }
 }

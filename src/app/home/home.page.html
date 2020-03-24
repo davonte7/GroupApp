@@ -16,7 +16,7 @@
       </ion-item>
       <ion-item *ngFor="let project of projects" (click)="goToProject(project)">
         <ion-label><h2> {{project.name}} </h2></ion-label>
-        <p>% {{project.percentComplete}}</p>
+        <p> {{project.percentComplete}}%</p>
       </ion-item>
     </ion-list>
   </div>

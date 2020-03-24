@@ -16,6 +16,7 @@ export class TasksDetailsPage implements OnInit {
     public team;
     public percent;
     public id;
+    public complete;
     public tasks = [{title:this.title,
       description:this.description,
       team:this.team,
@@ -45,7 +46,8 @@ export class TasksDetailsPage implements OnInit {
           var team = taskRef.emails
           var percent = taskRef.percentage
           var id = taskRef.id
-          var task = {title, description, team,percent,id}
+          var complete = taskRef.complete
+          var task = {title, description, team,percent,id,complete}
           self.tasks.push(task);
           console.log("Tasks Retrieved")
         })
@@ -65,8 +67,28 @@ export class TasksDetailsPage implements OnInit {
     this.goBack()
   }
 
+  completeTask(task){
+    var id = task.id;
+    var projectId = this.currentProject.id
+
+    //Mark Task as complete in Task Service
+    this.taskService.completeTask(id,projectId)
+    alert("Task Completed")
+    this.goBack()
+  }
+
   goBack(){
     this.router.navigate(["project-detail",this.currentProject])
+  }
+
+  incompleteTask(task){
+    var id = task.id;
+    var projectId = this.currentProject.id
+
+    //Mark Task as complete in Task Service
+    this.taskService.incompleteTask(id,projectId)
+    alert("Task Marked Incomplete")
+    this.goBack()
   }
 
 }

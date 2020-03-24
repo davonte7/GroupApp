@@ -12,7 +12,8 @@
   </ion-item>
   <ion-item>
     <ion-label color="primary" position="floating">Description</ion-label>
-    <ion-input type="text" [(ngModel)]="project.description" required></ion-input>
+    <ion-textarea type="text"  [(ngModel)]="project.description" required  autogrow="true" spellcheck="true">
+    </ion-textarea>
   </ion-item>
     <ion-item>
       <ion-label color="primary" position="floating"> Due Date </ion-label>

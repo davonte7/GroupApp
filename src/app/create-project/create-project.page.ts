@@ -36,14 +36,6 @@ export class CreateProjectPage implements OnInit {
 
   ngOnInit() {
   }
-
-  //Format Date Input
-  formatDate(date: string){
-    var newDate = date.split("T")[0];
-    var newerDate = newDate.split('-')
-    var finalDate = newerDate[1] + "/" + newerDate[2] + "/" + newerDate[0];
-    return finalDate;
-  }
   
   createProject(){
     console.log("Creating Project for user: " + firebase.auth().currentUser.email );
@@ -51,7 +43,7 @@ export class CreateProjectPage implements OnInit {
     //Get Values From Form
     var name=this.project.name;
     var description=this.project.description;
-    var dueDate = this.formatDate(this.project.dueDate);
+    var dueDate = this.project.dueDate;
     
     //Create Project in Project Service
     this.projectService.createProject(name,description,dueDate)

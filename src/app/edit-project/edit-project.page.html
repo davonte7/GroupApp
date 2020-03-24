@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-icon size="large" slot="start" name="arrow-back-outline" (click)="goBack()"></ion-icon>
-    <ion-icon size="large" slot="end" name="trash-sharp" (click)="deleteProject()"></ion-icon>
+    <ion-icon color="danger" size="large" slot="end" name="trash-sharp" (click)="deleteProject()"></ion-icon>
   </ion-toolbar>
 </ion-header>
  
@@ -13,7 +13,9 @@
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="floating">Description</ion-label>
-      <ion-input type="text" formControlName="description" required></ion-input>
+      <ion-textarea type="text" formControlName="description" required  autogrow="true" spellcheck="true">
+      
+      </ion-textarea>
     </ion-item> 
     <ion-item>
       <ion-label color="primary" position="floating">Due Date</ion-label>
