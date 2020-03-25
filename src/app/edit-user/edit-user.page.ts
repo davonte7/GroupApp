@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./edit-user.page.scss'],
 })
 export class EditUserPage implements OnInit {
-
+  profilePic;
   edit_user_form:FormGroup;
   constructor(
   	private router: Router,
@@ -34,7 +34,6 @@ export class EditUserPage implements OnInit {
   ngOnInit() {
     var self = this;
     var db = firebase.firestore();
-
     //Get User Data
     db.collection("users").where("id", "==",firebase.auth().currentUser.uid).onSnapshot(function(querySnapshot) {
       console.log("User Profile Loading...........");
@@ -42,6 +41,9 @@ export class EditUserPage implements OnInit {
       querySnapshot.forEach(function(doc) {
       var user = doc.data();
 
+      //Get Current Profile Picture URL
+      self.profilePic = user.profilePicUrl
+      console.log(self.profilePic)
       //Plug In existing values to form
       self.edit_user_form.patchValue({firstName:user.firstName});
       self.edit_user_form.patchValue({lastName:user.lastName});
@@ -59,7 +61,6 @@ export class EditUserPage implements OnInit {
  
   updateUser(value){
     var db =firebase.firestore()
-    var user;
     var self = this;
     var docId;
     var newValues;
