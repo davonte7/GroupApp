@@ -55,7 +55,9 @@ export class ProjectDetailPage implements OnInit {
             var task = doc.data();
 
             //Push to Arrays
-            self.tasks.push(task.title);
+            var title = task.title
+            var complete = task.complete
+            self.tasks.push({title,complete});
           })
           });
           console.log("Tasks Retrieved")

@@ -37,9 +37,12 @@
         Tasks
         <ion-icon size="small" name="pencil-sharp" (click)="goToTasks()"></ion-icon>
       </ion-label>
-      <ion-list>
-        <ion-item *ngFor="let task of tasks">
-          {{task}}
+      <ion-list *ngFor="let task of tasks">
+        <ion-item *ngIf="task.complete == false" id="incomplete">
+          {{task.title}}
+        </ion-item>
+        <ion-item *ngIf="task.complete == true"  id="complete" >
+          {{task.title}}
         </ion-item>
       </ion-list>
     </div>
