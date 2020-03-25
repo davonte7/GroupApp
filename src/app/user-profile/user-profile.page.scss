@@ -24,46 +24,22 @@
     margin-top: 50px;
 }
 
-#bio{
-    max-height: 75px;
+#info{
+    font-style: italic;
 }
 
-#container{
+#about{
     text-align: center;
-    margin-bottom: 50px;;
 }
 
-
-
-#contact{
-    display: block;
-    float: left;
-    margin-bottom: 50px;
-    max-width: 190px;
+#bio{
+    margin: 5%;
 }
 
 #projectNum{
-    display: block;
-    float: right;
-    margin-bottom: 50px;
     text-align: center;
-    padding-right: 2px;
 }
-
 
 #company{
-    clear: both;
     text-align: center;
-    margin: auto;
-    display: block;
-}
-
-#active{
-    margin-bottom: 2px;
-    display: inline-block;
-
-}
-
-#complete{
-    display: block;
 }

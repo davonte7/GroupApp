@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-icon  id="back" slot="start" name="arrow-back" (click)="goBack()"></ion-icon>
+    <ng-container *ngIf="user.id != currentUser">
+    <ion-icon  id="options" slot="end" name="ellipsis-horizontal"></ion-icon>
+  </ng-container>
     <ion-title>
       {{user.firstName}}  {{user.lastName}}
     </ion-title>
@@ -15,32 +18,25 @@
   <div id="profile">
     <h1 >{{user.firstName}}    {{user.lastName}}
     </h1>
-    <p id="bio">{{user.bio}}</p>
+    <p id="info" >
+      <ion-icon name="mail"></ion-icon> {{user.email}}  
+      <ion-icon name="call"></ion-icon> {{user.phone}}
+    </p>
   </div>
 
-  <div id="container">
-    <div id="contact">
-      <h4>Email</h4>
-      <p >{{user.email}}</p>
+  <div id="about">
+      <h4> <strong>About</strong></h4>
+      <p id="bio">{{user.bio}}</p>
+  </div>
 
-      <h4>Phone</h4>
-      <p >{{user.phone}}</p>
-    </div>
     <div id="projectNum">
-      <h4>Number of Projects</h4>
-      <div id="active">
-        <h6>Active</h6>
-        <p>0</p>
-      </div>
-      <div id="complete"> 
-        <h6>Completed</h6>
-        <p>0</p>
-      </div>
+      <h4>Number of Projects Created:</h4>
+      <p>{{user.numOfProjects}}</p>
     </div>
-  </div>
 
   <div id="company">
     <h4>Company</h4>
-    <p >{{user.company}}</p>
+    <p>{{user.company}}</p>
   </div>
 </ion-content>
+

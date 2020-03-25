@@ -35,7 +35,8 @@ export class UserProfilePage implements OnInit {
         bio:user.bio,
         email:user.email,
         phone:user.phone,
-        profilePic: user.profilePicUrl
+        profilePic: user.profilePicUrl,
+        numOfProjects: user.numOfProjects
       })
       console.log(self.users);
       });

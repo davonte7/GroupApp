@@ -8,9 +8,9 @@
 
 <ion-content>
 
-  <div id="container">
+  <div id="container" *ngIf="projects.length > 0">
     <ion-list>
-      <ion-item>
+      <ion-item >
         <ion-label><h2><strong>Name</strong></h2></ion-label>
         <p><strong>% Complete</strong></p>
       </ion-item>
@@ -19,6 +19,12 @@
         <p> {{project.percentComplete}}%</p>
       </ion-item>
     </ion-list>
+  </div>
+
+  <div id="empty" *ngIf="projects.length == 0">
+    <h4 >
+      Create a Project to Get Started!
+    </h4>
   </div>
  
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>

@@ -13,6 +13,7 @@ export class MemberDetailsPage implements OnInit {
  
   currentProject:any
   currentMember:any
+  currentUser:any
   user: any;
   constructor(    private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -20,6 +21,7 @@ export class MemberDetailsPage implements OnInit {
 
   ngOnInit() {
    console.log("Loading Project")
+   this.currentUser = firebase.auth().currentUser.uid
    this.route.params.subscribe(
         //Get Current Project and Current Member
         param => {
