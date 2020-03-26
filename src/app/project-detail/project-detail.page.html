@@ -51,9 +51,12 @@
         Meetings
         <ion-icon size="small" name="pencil-sharp" (click)="goToMeetings()"></ion-icon>
       </ion-label>
-      <ion-list>
-        <ion-item *ngFor="let meeting of meetings" >
-          {{meeting}}
+      <ion-list *ngFor="let meeting of meetings">
+        <ion-item id="upcoming" *ngIf="meeting.passed == false" >
+          {{meeting.meeting}}
+        </ion-item>
+        <ion-item id="passed" *ngIf="meeting.passed == true" >
+          {{meeting.meeting}}
         </ion-item>
       </ion-list>
     </div>

@@ -22,7 +22,8 @@ export class MeetingsDetailsPage implements OnInit {
     var db = firebase.firestore();
     var self = this;
     console.log("Loading Project")
-
+    var today = new Date()
+    console.log(today)
     //Get Meeting Details
     this.route.params.subscribe(
         param => {
@@ -38,7 +39,9 @@ export class MeetingsDetailsPage implements OnInit {
             var time = self.formatDate(detail.time);
             var place = String(detail.location + " on " + time);
             var id = detail.id
-            self.meetings.push({place,id});
+            var date = new Date(detail.time)
+            var passed = (date.getTime() > today.getTime())
+            self.meetings.push({place,id,passed});
             console.log("Meetings Retrieved")
           })
           });
@@ -53,6 +56,20 @@ export class MeetingsDetailsPage implements OnInit {
 
     //Format Time
     var time = newDate[1].split(":");
+    
+    //Change from military time
+    if(time[0] == "00"){
+      time[0] = "12";
+      time[1] = time[1] + " am"
+    }
+
+    if(Number(time[0]) > 12){
+      time[0] = String(Number(time[0])-12)
+      time[1] = time[1] + " pm"
+    }
+    else{
+      time[1] = time[1] + " am"
+    }
     time = time[0] + ":" + time[1];
     var finalDate = day + " at " + time;
     return finalDate;

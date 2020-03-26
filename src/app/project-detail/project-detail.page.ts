@@ -24,6 +24,7 @@ export class ProjectDetailPage implements OnInit {
   ngOnInit() {
     var db = firebase.firestore();
     var self = this;
+    var today = new Date()
     console.log("Loading Clicked Project")
     this.route.params.subscribe(
         param => {
@@ -43,8 +44,10 @@ export class ProjectDetailPage implements OnInit {
           db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
             var detail = doc.data();
             var time = self.formatDate(detail.time);
+            var date = new Date(detail.time)
+            var passed = (date.getTime() < today.getTime())
             var meeting = String(detail.location + " on " + time);
-            self.meetings.push(meeting);
+            self.meetings.push({meeting,passed});
             console.log("Meetings Retrieved")
           })
           });
@@ -80,6 +83,14 @@ export class ProjectDetailPage implements OnInit {
 
     //Format Time
     var time = newDate[1].split(":");
+       //Change from military time
+       if(time[0] == "00"){
+        time[0] = "12";
+      }
+  
+      if(Number(time[0]) > 12){
+        time[0] = String(Number(time[0])-12)
+      }
     time = time[0] + ":" + time[1];
     var finalDate = day + " at " + time;
     return finalDate;

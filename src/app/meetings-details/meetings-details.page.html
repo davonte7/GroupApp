@@ -10,19 +10,23 @@
     <ion-label>
       Upcoming Meetings
     </ion-label>
-    <ion-item *ngFor="let meeting of meetings" (click)="deleteMeeting(meeting)" >
+    <ng-container *ngFor="let meeting of meetings">
+    <ion-item *ngIf="meeting.passed == true" (click)="deleteMeeting(meeting)" >
       {{meeting.place}}
       <ion-icon color="danger" size="small" slot="end" name="trash"></ion-icon>
     </ion-item>
+  </ng-container>
   </ion-list>
 
   <ion-list>
     <ion-label>
       Past Meetings
     </ion-label>
-    <ion-item *ngFor="let meeting of meetings" >
-      {{meeting.place}}
-      <ion-icon color="danger" size="small" slot="end" name="trash"></ion-icon>
-    </ion-item>
+    <ng-container *ngFor="let meeting of meetings">
+      <ion-item *ngIf="meeting.passed == false" (click)="deleteMeeting(meeting)" >
+        {{meeting.place}}
+        <ion-icon color="danger" size="small" slot="end" name="trash"></ion-icon>
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>
