@@ -36,7 +36,8 @@ export class UserProfilePage implements OnInit {
         email:user.email,
         phone:user.phone,
         profilePic: user.profilePicUrl,
-        numOfProjects: user.numOfProjects
+        numOfProjects: user.numOfProjects,
+        url: user.profilePicUrl
       })
       console.log(self.users);
       });

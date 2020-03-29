@@ -30,8 +30,10 @@
     <img id="currentPic" src="{{profilePic}}">
     <ion-label id="editPic" color="primary" position="floating">Update Profile Picture</ion-label>
     <ion-item>
-      <ion-input type="file" formControlName="URL" multiple="false" accept="image/*" ></ion-input>
+      <ion-icon id="take" size="large" name="camera" (click)="captureImage()"></ion-icon>
+      <ion-icon id="upload" size="large" name="cloud-upload" (click)="selectImage()"></ion-icon>
     </ion-item>
+    <ng-container *ngIf="image.length > 0"><img src= "{{image}}"></ng-container>
     <ion-button class="submit-btn" expand="block" type="submit" >Update</ion-button>
   </form>
 </ion-content>

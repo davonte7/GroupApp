@@ -4,15 +4,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor= "let user of users">
   <div id="background">
-    <img src="assets/imgs/defaultUser.jpg">
+    <img src="{{user.url}}">
   </div>
 
   <div id="profile">
     <h1 *ngFor= "let user of users">{{user.firstName}}    {{user.lastName}}
     </h1>
-    <p id="info" *ngFor= "let user of users">
+    <p id="info" >
       <ion-icon name="mail"></ion-icon> {{user.email}}  
       <ion-icon name="call"></ion-icon> {{user.phone}}
     </p>
@@ -20,16 +20,16 @@
 
   <div id="about">
       <h4> <strong>About</strong></h4>
-      <p id="bio" *ngFor= "let user of users">{{user.bio}}</p>
+      <p id="bio">{{user.bio}}</p>
   </div>
 
     <div id="projectNum">
       <h4>Number of Projects Created:</h4>
-      <p *ngFor= "let user of users">{{user.numOfProjects}}</p>
+      <p>{{user.numOfProjects}}</p>
     </div>
 
   <div id="company">
     <h4>Company</h4>
-    <p *ngFor= "let user of users">{{user.company}}</p>
+    <p>{{user.company}}</p>
   </div>
 </ion-content>
