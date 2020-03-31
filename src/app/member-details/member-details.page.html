@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-icon  id="back" slot="start" name="arrow-back" (click)="goBack()"></ion-icon>
     <ng-container *ngIf="user.id != currentUser">
-    <ion-icon  id="options" slot="end" name="ellipsis-horizontal"></ion-icon>
+    <ion-icon color="danger" id="options" slot="end" name="person-remove" (click)="removeUser()" ></ion-icon>
   </ng-container>
     <ion-title>
       {{user.firstName}}  {{user.lastName}}

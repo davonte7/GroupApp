@@ -45,6 +45,14 @@ export class MemberDetailsPage implements OnInit {
     });
   }
 
+  removeUser(){
+    var id =this.currentProject;
+    var memberId = this.currentMember;
+    this.projectService.removeMember(id,memberId)
+    alert("User Successfully Removed")
+    this.goBack()
+  }
+
   goBack(){
     var db = firebase.firestore();
     var project;

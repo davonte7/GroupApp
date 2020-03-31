@@ -227,6 +227,30 @@ export class ProjectService {
     });
   }
 
+  removeMember(id,memberID){
+    var db = firebase.firestore();
+    
+    //Get Project
+    db.collection("projects").where("id","==",id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var projectId = doc.id;
+      var projectRef = db.collection("projects").doc(projectId);
+
+      //Remove Member From Array in Project
+      projectRef.update({
+        team: firebase.firestore.FieldValue.arrayRemove(memberID)
+      })
+      .then(function() {
+        console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+
+    })
+    });
+  }
+
   removeMeeting(id, meeting){
     console.log(id);
     var db = firebase.firestore();
