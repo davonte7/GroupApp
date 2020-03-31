@@ -15,6 +15,7 @@ export class MemberDetailsPage implements OnInit {
   currentMember:any
   currentUser:any
   user: any;
+  public clicked = false;
   constructor(    private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router) { }
@@ -51,6 +52,20 @@ export class MemberDetailsPage implements OnInit {
     this.projectService.removeMember(id,memberId)
     alert("User Successfully Removed")
     this.goBack()
+  }
+
+  toggleClick(){
+    if(this.clicked == false){
+      this.clicked = true
+    }
+    else{
+      this.clicked = false;
+    }
+  }
+
+  transferOwnership(){
+    this.projectService.transferOwnership(this.currentProject,this.currentMember)
+    alert("ownership successfully transferred")
   }
 
   goBack(){

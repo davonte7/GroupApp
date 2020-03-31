@@ -2,17 +2,26 @@
   <ion-toolbar>
     <ion-icon  id="back" slot="start" name="arrow-back" (click)="goBack()"></ion-icon>
     <ng-container *ngIf="user.id != currentUser">
-    <ion-icon color="danger" id="options" slot="end" name="person-remove" (click)="removeUser()" ></ion-icon>
+  <ion-icon id="options" slot="end" name="ellipsis-horizontal" (click)="toggleClick()" ></ion-icon>
   </ng-container>
     <ion-title>
-      {{user.firstName}}  {{user.lastName}}
+      Member Details
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+ <ion-list *ngIf="clicked == true">
+   <ion-item (click)="removeUser()">
+    Remove User from Team
+   </ion-item>
+
+   <ion-item (click)="transferOwnership()">
+     Transfer Ownership to User
+  </ion-item>
+ </ion-list>
   <div id="background">
-    <img src="assets/imgs/defaultUser.jpg">
+    <img src="{{user.profilePicUrl}}">
   </div>
 
   <div id="profile">
