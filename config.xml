@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Group Project App</name>
+    <name>GRP</name>
     <description>CSCE 546 App</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">DaVonte, Blake, Vishwajeet</author>
     <content src="index.html" />
