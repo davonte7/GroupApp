@@ -58,7 +58,7 @@
         <ion-item id="passed" *ngIf="meeting.passed == true" >
           {{meeting.meeting}}
         </ion-item>
-        <ion-button> Location </ion-button>
+        <ion-button (click) = "goToGooglePage()" > Location </ion-button>
       </ion-list>
     </div>
   </div>

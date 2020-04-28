@@ -161,4 +161,8 @@ export class ProjectDetailPage implements OnInit {
   goToMessages(){
     this.router.navigate(["messages", this.currentProject])
   }
+
+  goToGooglePage() {
+    this.router.navigate(["google-map"]);
+  }
 }
