@@ -71,7 +71,8 @@ const routes: Routes = [
   {
     path: 'messages',
     loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
-  },  {
+  },
+  {
     path: 'google-map',
     loadChildren: () => import('./google-map/google-map.module').then( m => m.GoogleMapPageModule)
   },

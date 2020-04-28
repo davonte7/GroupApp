@@ -1,0 +1,5 @@
+For geolocation ->
+
+ionic cordova plugin add @mauron85/cordova-plugin-background-geolocation
+
+npm install @ionic-native/background-geolocation

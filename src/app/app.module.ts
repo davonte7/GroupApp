@@ -12,6 +12,10 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { Camera } from '@ionic-native/camera/ngx';
 
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
+
+import { Geolocation } from '@ionic-native/geolocation/ngx'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +28,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     StatusBar,
     Camera,
     SplashScreen,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
