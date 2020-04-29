@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-messages',
@@ -8,8 +9,10 @@ import * as firebase from 'firebase';
 })
 export class MessagesPage implements OnInit {
   messages = [];
+  currentProject:any;
   constructor(
-    
+    private router: Router,
+    private route: ActivatedRoute
     ) {}
 
   ngOnInit() {
@@ -24,6 +27,10 @@ export class MessagesPage implements OnInit {
     })
     });
 
+    this.route.params.subscribe(
+      param => {
+        this.currentProject = param;
+  })
     
   }
 
@@ -43,6 +50,9 @@ export class MessagesPage implements OnInit {
     });
   }
 
+  goBack(){
+    this.router.navigate(["project-detail",this.currentProject]);
+  }
 
 
 }

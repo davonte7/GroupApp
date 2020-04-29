@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
+import { ActivatedRoute, Router } from '@angular/router';
+import { MeetingsDetailsPage } from '../meetings-details/meetings-details.page';
 
 declare var google: any;
 
@@ -11,9 +13,11 @@ declare var google: any;
 
 export class GoogleMapPage implements OnInit{
   map:any;
-  
+  currentProject: any;
   constructor(
-    private geo: Geolocation
+    private geo: Geolocation,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -33,8 +37,16 @@ export class GoogleMapPage implements OnInit{
     }).catch( e => {
       console.log(e);
     })
+
+    this.route.params.subscribe(
+      param => {
+        this.currentProject = param;
+  })
     
   }
   
+  goBack(){
+    this.router.navigate(["project-detail",this.currentProject]);
+  }
 
 }

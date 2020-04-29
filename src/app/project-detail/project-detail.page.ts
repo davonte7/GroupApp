@@ -163,6 +163,6 @@ export class ProjectDetailPage implements OnInit {
   }
 
   goToGooglePage() {
-    this.router.navigate(["google-map"]);
+    this.router.navigate(["google-map",this.currentProject]);
   }
 }
