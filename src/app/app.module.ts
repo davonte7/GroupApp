@@ -16,6 +16,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation/ngx';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx'
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,14 +28,24 @@ import { Geolocation } from '@ionic-native/geolocation/ngx'
      IonicModule.forRoot(),
      AppRoutingModule,
     IonicStorageModule.forRoot(),
+    BrowserModule, 
+      FormsModule, ReactiveFormsModule,IonicModule,CommonModule
   ],
+  
   providers: [
     StatusBar,
     Camera,
     SplashScreen,
     Geolocation,
+    NativeGeocoder,
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+export class GoogleMapPageModule {}
