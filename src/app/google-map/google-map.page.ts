@@ -9,7 +9,7 @@ declare var google;
 })
 
 export class GoogleMapPage implements OnInit, AfterViewInit {
-  @ViewChild('nativeElement', {static: false}) mapNativeElement: ElementRef;
+  @ViewChild('map', {static : false}) mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   directionForm: FormGroup;
@@ -35,11 +35,11 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
       this.currentLocation.lat = resp.coords.latitude;
       this.currentLocation.lng = resp.coords.longitude;
     });
-     /*const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+     const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
       zoom: 7,
       center: {lat: 41.85, lng: -87.65}
-    }); */
-    //this.directionsDisplay.setMap(map);
+    }); 
+    this.directionsDisplay.setMap(map);
   }
 
   calculateAndDisplayRoute(formValues) {
