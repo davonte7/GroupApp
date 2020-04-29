@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router,ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
+import * as firebase from 'firebase';
+
 declare var google;
 @Component({
   selector: 'app-google-map',
@@ -10,6 +13,10 @@ declare var google;
 
 export class GoogleMapPage implements OnInit, AfterViewInit {
   map:any;
+  currentProject:any
+  public googlemap;
+  x:any;
+  place:any;
   @ViewChild('map', {static :false}) mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
@@ -18,8 +25,12 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
     lat: 0,
     lng: 0
   };
-  constructor(private fb: FormBuilder, private geolocation: Geolocation) {
+
+  constructor(private fb: FormBuilder, private geolocation: Geolocation, private route: ActivatedRoute,
+    private router: Router) {
+    
     this.createDirectionForm();
+    
   }
 
   ngOnInit() {
@@ -36,6 +47,45 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    var db = firebase.firestore();
+   // console.log("hiii " + this.currentProject.location);
+    //this.place = String(location);
+    
+    this.route.params.subscribe(
+      param => {
+        //Get Current Project
+        this.currentProject = param;
+        console.log(param);
+
+        this.googlemap = [];
+
+        //Get Meetings for Current Project
+        
+        db.collection("meetings").where("projectId","==",this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+          var detail = doc.data();
+       //   var time = self.formatDate(detail.time);
+          this.place = String(detail.location);
+          var id = detail.id
+     //     var date = new Date(detail.time)
+      //    var passed = (date.getTime() > today.getTime())
+      //    self.meetings.push({place,id,passed});
+          console.log("Meetings Retrieved " + this.place)
+        })
+        });
+      }) 
+
+   /* firebase.auth().onAuthStateChanged(function(user) {
+      if(user) {
+    db.collection("meetings").doc(firebase.auth().currentUser.uid).get().then((snapshot) =>  {
+      /*snapshot.docs.forEach(doc => {
+          console.log(doc.data())
+    }) 
+    console.log(snapshot.docs);
+  
+  })
+}
+    }) */
+
     this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLocation.lat = resp.coords.latitude;
       this.currentLocation.lng = resp.coords.longitude;
@@ -48,10 +98,36 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
   }
 
   calculateAndDisplayRoute(formValues) {
+    var db = firebase.firestore();
+ //   this.place = String(location);
+   /* this.route.params.subscribe(
+      param => {
+        //Get Current Project
+        this.currentProject = param;
+        console.log(param);
+
+        this.googlemap = [];
+
+    db.collection("meetings").where("projectId","==", this.currentProject.id).get().then((snapshot) =>{snapshot.docs.forEach(doc => {
+      var detail = doc.data();
+   //   var time = self.formatDate(detail.time);
+      
+      this.place = String(detail.location);
+      var id = detail.id
+ //     var date = new Date(detail.time)
+  //    var passed = (date.getTime() > today.getTime())
+  //    self.meetings.push({place,id,passed});
+      console.log("Meetings Retrieved " + this.place)
+      
+    })
+  })
+}) 
+*/
     const that = this;
     this.directionsService.route({
       origin: this.currentLocation,
-      destination: formValues.destination,
+      destination: this.place,
+      
       travelMode: 'DRIVING'
     }, (response, status) => {
       if (status === 'OK') {

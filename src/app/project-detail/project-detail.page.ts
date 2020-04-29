@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
+import { MeetingService } from '../services/meeting.service';
+import { DetailedPeerCertificate } from 'tls';
  
 @Component({
   selector: 'app-project-detail',
@@ -163,6 +165,6 @@ export class ProjectDetailPage implements OnInit {
   }
 
   goToGooglePage() {
-    this.router.navigate(["google-map",this.currentProject]);
+    this.router.navigate(["google-map", this.currentProject]);
   }
 }
