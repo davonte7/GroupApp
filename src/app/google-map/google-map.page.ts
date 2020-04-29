@@ -9,7 +9,8 @@ declare var google;
 })
 
 export class GoogleMapPage implements OnInit, AfterViewInit {
-  @ViewChild('map', {static : false}) mapNativeElement: ElementRef;
+  map:any;
+  @ViewChild('map', {static :false}) mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
   directionForm: FormGroup;
@@ -22,6 +23,10 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+  /*  this.map = new google.maps.Map(document.getElementById("map"), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom:8
+  }); */
   }
 
   createDirectionForm() {
@@ -36,8 +41,8 @@ export class GoogleMapPage implements OnInit, AfterViewInit {
       this.currentLocation.lng = resp.coords.longitude;
     });
      const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+      center: {lat: 41.85, lng: -87.65},
       zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
     }); 
     this.directionsDisplay.setMap(map);
   }
