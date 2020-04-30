@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Messages</ion-title>
+    <ion-button (click)="goBack()" slot="end">Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,16 +20,10 @@
 
 <ion-footer>
   <ion-item>
-    <ion-textarea [(ngModel)]="recipient" auto-grow="true" placeholder="Send To:" spellcheck = "true">
-      
-    </ion-textarea>
-    
-  </ion-item>
-  <ion-item>
     <ion-textarea [(ngModel)]="message" auto-grow="true" placeholder="Type Your Message" spellcheck = "true">
       
     </ion-textarea>
-    <button (click) = "upload(message, recipient)">
+    <button (click) = "upload(message)">
       <ion-icon slot="end" size="large" name="send"></ion-icon>
     </button>
     
