@@ -52,13 +52,12 @@
         <ion-icon size="small" name="pencil-sharp" (click)="goToMeetings()"></ion-icon>
       </ion-label>
       <ion-list *ngFor="let meeting of meetings">
-        <ion-item id="upcoming" *ngIf="meeting.passed == false" >
+        <ion-item id="upcoming" *ngIf="meeting.passed == false" (click) = "goToGooglePage(meeting.meeting)">
           {{meeting.meeting}}
         </ion-item>
-        <ion-item id="passed" *ngIf="meeting.passed == true" >
+        <ion-item id="passed" *ngIf="meeting.passed == true" (click) = "goToGooglePage(meeting.meeting)" >
           {{meeting.meeting}}
         </ion-item>
-        <ion-button (click) = "goToGooglePage()" > Location </ion-button>
       </ion-list>
     </div>
   </div>

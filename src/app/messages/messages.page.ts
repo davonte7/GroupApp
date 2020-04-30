@@ -13,9 +13,8 @@ export class MessagesPage implements OnInit {
   currentProject:any;
   messages = [];
   constructor(
-    private route: ActivatedRoute,
-    private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) {}
 
   ngOnInit() {
@@ -37,11 +36,11 @@ export class MessagesPage implements OnInit {
     })
     });
 
+    this.route.params.subscribe(
+      param => {
+        this.currentProject = param;
+  })
     
-  }
-
-  goBack() {
-    this.router.navigate(["project-detail",this.currentProject])
   }
 
   upload(message) {
@@ -60,6 +59,9 @@ export class MessagesPage implements OnInit {
     });
   }
 
+  goBack(){
+    this.router.navigate(["project-detail",this.currentProject]);
+  }
 
 
 }

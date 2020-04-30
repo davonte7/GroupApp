@@ -1,7 +1,8 @@
 {
   "name": "GroupApp",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

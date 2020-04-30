@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase';
+import { MeetingService } from '../services/meeting.service';
  
 @Component({
   selector: 'app-project-detail',
@@ -162,7 +163,29 @@ export class ProjectDetailPage implements OnInit {
     this.router.navigate(["messages", this.currentProject])
   }
 
-  goToGooglePage() {
-    this.router.navigate(["google-map"]);
+  goToGooglePage(meeting) {
+    console.log(meeting);
+    var detail = meeting.split(" on ");
+    var location = detail[0];
+    var project = this.currentProject
+    console.log(location);
+    
+    var projects:any = [];
+    projects.push({    
+      id:project.id,           
+      name:project.name,
+      description:project.description,
+      dueDate: project.dueDate,
+      owner: project.owner,
+      dateCreated: project.dateCreated,
+      tasks: project.tasks,
+      meetings: project.meetings,
+      team: project.team,
+      complete: project.complete,
+      percentComplete: project.percentComplete,
+      location: location
+      });
+    project = projects[0];
+    this.router.navigate(["google-map",project]);
   }
 }
