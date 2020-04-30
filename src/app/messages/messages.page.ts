@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../services/project.service';
 import { Subscriber, Subscription } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 import * as firebase from 'firebase';
 
 @Component({
@@ -14,16 +15,18 @@ export class MessagesPage implements OnInit {
   messages = [];
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public toastController: ToastController
     ) {}
 
   ngOnInit() {
+    this.messages = [];
     this.route.params.subscribe(
       //Get Current Project and Current Member
       param => {
         this.currentProject = param;
       }
-
+      
   )
     var email = firebase.auth().currentUser.email;
     var db = firebase.firestore();
@@ -43,11 +46,21 @@ export class MessagesPage implements OnInit {
     
   }
 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Message Sent',
+      position: 'top',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
   upload(message) {
     var db = firebase.firestore();
-    var user = firebase.auth().currentUser.email;
+    var sender = firebase.auth().currentUser.email;
     db.collection("messages").add({
-      'sender':user,
+      'sender':sender,
       "message":message,
       'meeting':this.currentProject.id,
     })
@@ -57,6 +70,11 @@ export class MessagesPage implements OnInit {
     .catch(function(error) {
       console.error("Error adding document: ", error);
     });
+    var id = this.currentProject.id;
+    var data = {sender,message,id}
+    this.messages.push(data);
+
+    this.presentToast();
   }
 
   goBack(){

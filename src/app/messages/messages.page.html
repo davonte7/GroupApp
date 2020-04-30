@@ -23,9 +23,7 @@
     <ion-textarea [(ngModel)]="message" auto-grow="true" placeholder="Type Your Message" spellcheck = "true">
       
     </ion-textarea>
-    <button (click) = "upload(message)">
-      <ion-icon slot="end" size="large" name="send"></ion-icon>
-    </button>
+      <ion-icon slot="end" size="large" name="send" (click)= "upload(message)"></ion-icon>
     
   </ion-item>
 </ion-footer>
